@@ -1,4 +1,4 @@
-package Entity;
+package entity;
 
  /*
  *Author: Can Sahin
