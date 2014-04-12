@@ -1,6 +1,5 @@
 package entity;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -9,12 +8,12 @@ public class Ball extends Rectangle {
 
 	private Point position;
 	private BufferedImage image;
-	private int ballRadius = 20;
+	private static int ballRadius = 20;
 
-	private Ball createBall(Point position){
+	public static Ball createBall(Point position, BufferedImage img){
 		Ball ball = new Ball();
 		ball.setBounds(position.x, position.y, ballRadius, ballRadius);
-		ball.setImage(image);
+		ball.setImage(img);
 		return ball;
 	}
 	
