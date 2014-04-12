@@ -1,10 +1,9 @@
 package entity;
 
- /*
- *Author: Can Sahin
- */
-
 public class PlayerInfo {
+	
+	public int remainingLife;
+	public int score;
 
 }
 
