@@ -23,10 +23,9 @@ public class Brick extends Rectangle {
 	private static final String IMAGE_DIRECTORY_PATH = "assets/brickImages/";
 	
 	
-	public static Brick createBrick(int type, Point position, int width, int height) {
+	public static Brick createBrick(int type, Point position) {
 		Brick brick = new Brick(type);
 		brick.setLocation(position);
-		brick.setSize(width, height);
 		return brick;
 	}
 
