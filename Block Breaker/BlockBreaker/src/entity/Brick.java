@@ -3,6 +3,10 @@ package entity;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Brick extends Rectangle {
 	
@@ -16,10 +20,11 @@ public class Brick extends Rectangle {
 	private Point position;
 	private BufferedImage image;
 	
+	private static final String IMAGE_DIRECTORY_PATH = "assets/brickImages/";
 	
-	public static Brick createBrick(int type, BufferedImage img, Point position, int width, int height) {
+	
+	public static Brick createBrick(int type, Point position, int width, int height) {
 		Brick brick = new Brick(type);
-		brick.setImage(img);
 		brick.setLocation(position);
 		brick.setSize(width, height);
 		return brick;
@@ -28,6 +33,7 @@ public class Brick extends Rectangle {
 	public Brick (int type) {
 		this.type = type;
 		initilizeHealth();
+		initilizeImage();
 	}
 
 	private void initilizeHealth() {
@@ -42,6 +48,21 @@ public class Brick extends Rectangle {
 		}
 	}
 
+	private void initilizeImage() {
+		try {
+			if (type == UNBREAKABLE) {
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "unbreakable.png")));
+			} else if (type == WEAK) {
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "weak.png")));
+			} else if (type == STRONG) {
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "strong.png")));
+			} else {
+				throw new RuntimeException("Brick type is WRONG.");
+			}	
+		} catch (IOException e) {
+			System.err.println("Image NOT found.");
+		}
+	}
 
 	public int getHealth() {
 		return health;
