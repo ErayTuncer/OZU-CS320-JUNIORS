@@ -24,8 +24,6 @@ public class AppController {
 		initilizeGameController();
 		appFrame.setView(gameController.getView());
 		gameController.run();
-		System.out.println("start"); // TODO: REMOVE
-
 	}
 
 	private void initilizeGameController() {
