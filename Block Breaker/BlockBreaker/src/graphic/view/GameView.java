@@ -49,7 +49,7 @@ public class GameView extends View {
 		Paddle paddle = controller.getLevel().getPaddle();
 		Point position = paddle.getPosition();
 		Dimension size = paddle.getSize();
-		System.out.println(position.x);
+	
 		graphics.setColor(paddle.getColor());
 		graphics.drawRect(position.x, position.y, size.width, size.height);
 	}
@@ -57,8 +57,8 @@ public class GameView extends View {
 	private void drawBall(Graphics graphics) {
 		Ball ball = controller.getLevel().getBall();
 		Point position = ball.getPosition();
-		graphics.drawImage(ball.getImage() , position.x, position.y, ball.ballRadius, ball.ballRadius, this);
 		
+		graphics.drawImage(ball.getImage() , position.x, position.y, ball.radius, ball.radius, this);
 	}
 	
 }

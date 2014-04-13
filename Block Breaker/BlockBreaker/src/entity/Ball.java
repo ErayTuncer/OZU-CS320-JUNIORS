@@ -13,12 +13,12 @@ public class Ball extends Rectangle {
 	private Point position;
 	private static final String IMAGE_DIRECTORY_PATH = "assets/BallImage/";
 	private BufferedImage image;
-	public static int ballRadius = 20;
+	public static int radius = 20;
 
 	public static Ball createBall(Point position){
 		Ball ball = new Ball();
 		ball.position = position;
-		ball.setBounds(position.x, position.y, ballRadius, ballRadius);
+		ball.setBounds(position.x, position.y, radius, radius);
 		ball.setImage();
 		return ball;
 	}
@@ -33,9 +33,9 @@ public class Ball extends Rectangle {
 		
 	}
 	
-	public void moveBall(int xSpeed, int ySpeed){
-		this.position.x += xSpeed;
-		this.position.y += ySpeed;		
+	public void moveBall(int deltaX, int deltaY){
+		this.position.x += deltaX;
+		this.position.y += deltaY;		
 	}
 	
 	public Point getPosition(){
