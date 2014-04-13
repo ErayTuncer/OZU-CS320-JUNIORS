@@ -33,7 +33,7 @@ public class Ball extends Rectangle {
 		
 	}
 	
-	private void moveBall(int xSpeed, int ySpeed){
+	public void moveBall(int xSpeed, int ySpeed){
 		this.position.x += xSpeed;
 		this.position.y += ySpeed;		
 	}

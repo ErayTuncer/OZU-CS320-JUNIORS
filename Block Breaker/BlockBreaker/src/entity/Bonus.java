@@ -41,7 +41,7 @@ public class Bonus extends Rectangle {
 		return image;
 	}
 	
-	private void moveBonus(){
+	public void moveBonus(){
 		this.position.y += speed;
 	}
 	
