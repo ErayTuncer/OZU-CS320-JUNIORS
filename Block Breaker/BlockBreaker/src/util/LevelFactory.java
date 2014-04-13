@@ -20,7 +20,7 @@ public class LevelFactory {
 	}
 
 	private static Point calculateBallPosition() {
-		return new Point((AppFrame.WIDTH - Paddle.WIDTH) / 2, (AppFrame.HEIGHT - 4 * Paddle.HEIGHT) - Ball.radius);
+		return new Point((AppFrame.WIDTH - Ball.RADIUS) / 2, (AppFrame.HEIGHT - 4 * Paddle.HEIGHT) - Ball.RADIUS);
 	}
 
 	private static Point calculatePaddlesPosition() {

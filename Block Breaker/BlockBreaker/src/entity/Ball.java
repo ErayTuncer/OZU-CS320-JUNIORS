@@ -9,16 +9,16 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Ball extends Rectangle {
-
-	private Point position;
+	public static final int RADIUS = 20;
 	private static final String IMAGE_DIRECTORY_PATH = "assets/BallImage/";
+	
+	private Point position;
 	private BufferedImage image;
-	public static int radius = 20;
 
 	public static Ball createBall(Point position){
 		Ball ball = new Ball();
 		ball.position = position;
-		ball.setBounds(position.x, position.y, radius, radius);
+		ball.setBounds(position.x, position.y, RADIUS, RADIUS);
 		ball.setImage();
 		return ball;
 	}
@@ -29,8 +29,7 @@ public class Ball extends Rectangle {
 			this.image = img;
 		}catch (IOException e) {
 			System.err.println("Image NOT found.");
-		}
-		
+		}	
 	}
 	
 	public void moveBall(int deltaX, int deltaY){

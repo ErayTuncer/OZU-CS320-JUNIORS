@@ -58,7 +58,7 @@ public class GameView extends View {
 		Ball ball = controller.getLevel().getBall();
 		Point position = ball.getPosition();
 		
-		graphics.drawImage(ball.getImage() , position.x, position.y, ball.radius, ball.radius, this);
+		graphics.drawImage(ball.getImage() , position.x, position.y, ball.RADIUS, ball.RADIUS, this);
 	}
 	
 }
