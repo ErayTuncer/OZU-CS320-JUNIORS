@@ -1,18 +1,22 @@
 package entity;
 
+import java.awt.Color;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 
 public class Paddle extends Rectangle {
+
+	public static final int WIDTH = 100;
+	public static final int HEIGHT = 20;
+	public static final Color COLOR = Color.MAGENTA;
 	
 	private Point position;
-	private BufferedImage image;
-		
-	public static Paddle createPaddle(Point position, BufferedImage img, int width, int height) {
+	private Color color;
+	
+	public static Paddle createPaddle(Point position) {
 		Paddle paddle = new Paddle();
-		paddle.setBounds(position.x, position.y, width, height);
-		paddle.setImage(img);
+		paddle.setBounds(position.x, position.y, WIDTH, HEIGHT);
+		paddle.setColor(COLOR);
 		return paddle;
 	}
 	
@@ -36,10 +40,13 @@ public class Paddle extends Rectangle {
 		this.height = height;
 	}
 
-	public void setImage(BufferedImage image) {
-		this.image = image;
+	public void setColor(Color color) {
+		this.color = color;
 	}
 	
+	public Color getColor() {
+		return color;
+	}
 
 }
 
