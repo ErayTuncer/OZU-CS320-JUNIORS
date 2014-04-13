@@ -12,6 +12,7 @@ import controller.GameController;
 import entity.Ball;
 import entity.Brick;
 import entity.Paddle;
+import entity.PlayerInfo;
 
 
 public class GameView extends View implements MouseMotionListener{
@@ -30,6 +31,7 @@ public class GameView extends View implements MouseMotionListener{
 		drawBricks(graphics);
 		drawPaddle(graphics);
 		drawBall(graphics);
+		drawInfo(graphics);
 	}
 
 	private void drawBackground(Graphics graphics) {
@@ -62,6 +64,14 @@ public class GameView extends View implements MouseMotionListener{
 		Point position = ball.getLocation();
 		
 		graphics.drawImage(ball.getImage() , position.x, position.y, ball.RADIUS, ball.RADIUS, this);
+	}
+	
+	private void drawInfo(Graphics graphics) {
+		PlayerInfo info = controller.getPlayerInfo();
+		
+		graphics.setColor(Color.WHITE);
+		graphics.drawString("Life : " + info.remainingLife, 5, 15);
+		graphics.drawString("Score : " + info.score, 5, 30);		
 	}
 
 	@Override

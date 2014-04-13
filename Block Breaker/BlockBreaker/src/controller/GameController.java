@@ -128,6 +128,10 @@ public class GameController extends Thread {
 		return level;
 	}
 
+	public PlayerInfo getPlayerInfo() {
+		return playerInfo;
+	}
+
 	public void initilizeLevel(int levelNumber) {
 		level = LevelFactory.createLevel(levelNumber);
 	}
