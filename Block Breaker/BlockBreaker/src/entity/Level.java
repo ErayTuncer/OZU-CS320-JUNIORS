@@ -1,12 +1,12 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Level {
 	private int number;
-	private List<Brick> bricks;
+	private ArrayList<Brick> bricks;
 	private Paddle paddle;
-	private List<Bonus> bonuses;
+	private ArrayList<Bonus> bonuses;
 	
 	public int getNumber() {
 		return number;
@@ -14,10 +14,10 @@ public class Level {
 	public void setNumber(int number) {
 		this.number = number;
 	}
-	public List<Brick> getBricks() {
+	public ArrayList<Brick> getBricks() {
 		return bricks;
 	}
-	public void setBricks(List<Brick> bricks) {
+	public void setBricks(ArrayList<Brick> bricks) {
 		this.bricks = bricks;
 	}
 	public Paddle getPaddle() {
@@ -26,10 +26,10 @@ public class Level {
 	public void setPaddle(Paddle paddle) {
 		this.paddle = paddle;
 	}
-	public List<Bonus> getBonuses() {
+	public ArrayList<Bonus> getBonuses() {
 		return bonuses;
 	}
-	public void setBonuses(List<Bonus> bonuses) {
+	public void setBonuses(ArrayList<Bonus> bonuses) {
 		this.bonuses = bonuses;
 	}
 	
