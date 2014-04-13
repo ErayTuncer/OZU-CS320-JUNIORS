@@ -22,14 +22,16 @@ public class AppFrame extends JFrame {
 	}
 
 	public void setView(View view) {
+		removeContents();
 		view.setPreferredSize(getPreferredSize());
-		add(view);
-		setVisible(true);	
+		getContentPane().add(view);
+		getContentPane().revalidate();	
+		setVisible(true);
 	}
 
-	public void removeContents() {
-		revalidate();
-		repaint();
+	private void removeContents() {
+		getContentPane().removeAll();
+		getContentPane().invalidate();
 	}
 	
 }

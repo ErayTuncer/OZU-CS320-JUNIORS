@@ -1,5 +1,6 @@
 package graphic.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -19,22 +20,28 @@ public class GameView extends View {
 	}
 	
 	@Override
-	protected void paintComponent(Graphics graphics) {
-		// TODO add bonus 
-		super.paintComponent(graphics);
+	public void paint(Graphics graphics) {
+		// TODO uncomment  
+		super.paint(graphics);
+		drawBackground(graphics);
 		drawBricks(graphics);
-		drawPaddle(graphics);
-		drawBall(graphics);
+//		drawPaddle(graphics);
+//		drawBall(graphics);
+	}
+
+	private void drawBackground(Graphics graphics) {
+		graphics.setColor(Color.BLACK);
+		graphics.fillRect(0, 0, getWidth(), getHeight());
 	}
 
 	private void drawBricks(Graphics graphics) {
 		ArrayList<Brick> bricks = controller.getLevel().getBricks();
 		
 		for (Brick brick : bricks) {
-			Point position = brick.getPosition();
+			Point position = brick.getLocation();
 			Dimension size = brick.getSize(); 
-			
-			graphics.drawImage(brick.getImage(), position.x, position.y, size.width, size.height, null);		
+	
+			graphics.drawImage(brick.getImage(), position.x, position.y, size.width, size.height, this);		
 		}
 	}
 	

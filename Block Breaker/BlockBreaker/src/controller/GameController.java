@@ -4,7 +4,7 @@ import util.LevelFactory;
 import entity.Level;
 import graphic.view.GameView;
 
-public class GameController extends Thread {
+public class GameController {
 	
 	private GameView view;
 	private Level level;
@@ -13,10 +13,9 @@ public class GameController extends Thread {
 
 	public void run() {
 		//TODO : implement
-		while(true) {
-			
+//		while(true) {
 			view.repaint();
-		}
+//		}
 		
 	}
 	

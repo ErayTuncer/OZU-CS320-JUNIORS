@@ -20,7 +20,6 @@ public class Brick extends Rectangle {
 	
 	private int type;
 	private int health;
-	private Point position;
 	private BufferedImage image;
 	
 	private static final String IMAGE_DIRECTORY_PATH = "assets/brickImages/";
@@ -73,16 +72,6 @@ public class Brick extends Rectangle {
 
 	public void setHealth(int health) {
 		this.health = health;
-	}
-
-
-	public Point getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(Point position) {
-		this.position = position;
 	}
 
 

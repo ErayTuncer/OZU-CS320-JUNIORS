@@ -21,22 +21,17 @@ public class AppController {
 	}
 
 	public void startGame() {
-		setGameControllerForGame();
-		setAppFrameForGame();		
+		initilizeGameController();
+		appFrame.setView(gameController.getView());
 		gameController.run();
 		System.out.println("start"); // TODO: REMOVE
 
 	}
 
-	private void setAppFrameForGame() {
-		appFrame.removeContents();
-		appFrame.setView(new GameView(gameController));
-	}
-	
-
-	private void setGameControllerForGame() {
+	private void initilizeGameController() {
 		gameController = new GameController();
 		gameController.initilizeLevel(1);
+		gameController.setView(new GameView(gameController));
 	}
 
 	public void terminate() {
