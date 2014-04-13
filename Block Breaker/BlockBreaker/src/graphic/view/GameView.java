@@ -50,11 +50,11 @@ public class GameView extends View implements MouseMotionListener{
 	
 	private void drawPaddle(Graphics graphics) {
 		Paddle paddle = controller.getLevel().getPaddle();
-		Point position = paddle.getPosition();
+		Point position = paddle.getLocation();
 		Dimension size = paddle.getSize();
 	
 		graphics.setColor(paddle.getColor());
-		graphics.drawRect(position.x, position.y, size.width, size.height);
+		graphics.fillRect(position.x, position.y, size.width, size.height);
 	}
 	
 	private void drawBall(Graphics graphics) {

@@ -94,10 +94,8 @@ public class GameController {
 	
 	public void movePaddle(int x){
 		Paddle paddle = this.level.getPaddle(); 
-		if(x < paddle.getPosition().x){
-			paddle.movePaddle(-10);
-		}else if(x > paddle.getPosition().x){
-			paddle.movePaddle(10);
+		if(x - paddle.getSize().width / 2 > 0 && x + paddle.getSize().width / 2 < view.getWidth()) {
+			paddle.setLocation(x - paddle.getSize().width / 2, paddle.y);
 		}
 		view.repaint();
 	}
