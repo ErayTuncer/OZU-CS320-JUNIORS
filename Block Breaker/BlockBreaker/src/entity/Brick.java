@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,9 @@ public class Brick extends Rectangle {
 	public static final int 	   WEAK = 1;
 	public static final int 	 STRONG = 2;
 	
-
+	public static final int WIDTH  = 50;
+	public static final int HEIGHT = 20;
+	
 	private int type;
 	private int health;
 	private Point position;
@@ -22,10 +25,10 @@ public class Brick extends Rectangle {
 	
 	private static final String IMAGE_DIRECTORY_PATH = "assets/brickImages/";
 	
-	
 	public static Brick createBrick(int type, Point position) {
 		Brick brick = new Brick(type);
 		brick.setLocation(position);
+		brick.setSize(new Dimension(WIDTH, HEIGHT));
 		return brick;
 	}
 
