@@ -23,7 +23,7 @@ public class AppController {
 	public void startGame() {
 		initilizeGameController();
 		appFrame.setView(gameController.getView());
-		gameController.run();
+		gameController.start();
 	}
 
 	private void initilizeGameController() {

@@ -59,7 +59,7 @@ public class GameView extends View implements MouseMotionListener{
 	
 	private void drawBall(Graphics graphics) {
 		Ball ball = controller.getLevel().getBall();
-		Point position = ball.getPosition();
+		Point position = ball.getLocation();
 		
 		graphics.drawImage(ball.getImage() , position.x, position.y, ball.RADIUS, ball.RADIUS, this);
 	}

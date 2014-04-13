@@ -12,12 +12,11 @@ public class Ball extends Rectangle {
 	public static final int RADIUS = 20;
 	private static final String IMAGE_DIRECTORY_PATH = "assets/BallImage/";
 	
-	private Point position;
 	private BufferedImage image;
 
 	public static Ball createBall(Point position){
 		Ball ball = new Ball();
-		ball.position = position;
+
 		ball.setBounds(position.x, position.y, RADIUS, RADIUS);
 		ball.setImage();
 		return ball;
@@ -33,12 +32,7 @@ public class Ball extends Rectangle {
 	}
 	
 	public void moveBall(int deltaX, int deltaY){
-		this.position.x += deltaX;
-		this.position.y += deltaY;	
-	}
-	
-	public Point getPosition(){
-		return this.position;
+		this.setLocation(getLocation().x + deltaX, getLocation().y + deltaY);
 	}
 	
 	public BufferedImage getImage() {
