@@ -20,11 +20,17 @@ public class AppController {
 		appFrame.setView(new MenuView(this));	
 	}
 
-	public void startGame(){
-		appFrame.removeContents();
-		System.out.println("start");
-		gameController = new GameController(new GameView());
+	public void startGame() {
+		gameController = new GameController();
+		gameController.initilizeLevel(1);
+		
+		appFrame.setView(new GameView(gameController));		
+		
 		gameController.run();
+		
+		appFrame.removeContents();
+		System.out.println("start"); // TODO: REMOVE
+
 	}
 	
 	public void terminate() {
