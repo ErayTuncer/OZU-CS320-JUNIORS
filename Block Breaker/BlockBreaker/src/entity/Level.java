@@ -10,7 +10,6 @@ public class Level {
 	private ArrayList<Bonus> bonuses;
 	
 	
-	
 	public int getNumber() {
 		return number;
 	}

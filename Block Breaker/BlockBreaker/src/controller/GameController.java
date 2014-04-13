@@ -15,6 +15,7 @@ public class GameController extends Thread {
 		//TODO : implement
 		while(true) {
 			
+			view.repaint();
 		}
 		
 	}
