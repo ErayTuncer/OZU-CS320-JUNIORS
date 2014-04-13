@@ -23,8 +23,9 @@ public class GameController {
 			//checkCollisionWithBricks(); //TODO : implement
 			//checkCollisionWithPaddle(); //TODO : implement
 			//checkBallGoneOut(); //TODO : implement
-			view.repaint();
+			
 			//pause(); //TODO : implement
+			view.repaint();
 			i++;
 			
 		}
