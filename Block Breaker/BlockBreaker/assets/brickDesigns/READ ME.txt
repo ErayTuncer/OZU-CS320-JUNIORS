@@ -1,0 +1,10 @@
+BE CAREFUL!
+
+Brick designs must consist of 
+	- 14 columns and 10 rows.
+
+Each design can contain
+	- '0' for unbreakable bricks,
+	- '1' for weak bricks,
+	- '2' for strong bricks,
+	- '_' for empty spaces.
