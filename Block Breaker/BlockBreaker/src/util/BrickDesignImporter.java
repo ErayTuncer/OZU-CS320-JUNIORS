@@ -12,7 +12,7 @@ public class BrickDesignImporter {
 	
 	private static ArrayList<Brick> bricks;
 	private static ArrayList<char[]> brickDesign;
-	private static String DESIGN_DIRECTORY_PATH = "assests/brickDesigns/";
+	private static String DESIGN_DIRECTORY_PATH = "assets/brickDesigns/";
 	
 	public static ArrayList<Brick> getBrickDesign(int designNumber){
 		bricks = new ArrayList<Brick>();
@@ -38,8 +38,9 @@ public class BrickDesignImporter {
 	private static void generateBricks() {
 		for (int i = 0; i < brickDesign.size(); i++) {
 			for (int j = 0; j < brickDesign.get(i).length; j++) {
-				if(brickDesign.get(i)[j] == '_'){
-					Brick brick = Brick.createBrick(brickDesign.get(i)[j], calculateBricksPosition(i, j));
+				if(brickDesign.get(i)[j] != '_'){
+					int type = Character.getNumericValue(brickDesign.get(i)[j]);
+					Brick brick = Brick.createBrick(type, calculateBricksPosition(i, j));
 					bricks.add(brick);
 				}
 			}
