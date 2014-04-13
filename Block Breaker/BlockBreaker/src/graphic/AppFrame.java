@@ -15,6 +15,7 @@ public class AppFrame extends JFrame {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		setSize(size);
 		setPreferredSize(size);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMaximumSize(getMinimumSize());
 		setMinimumSize(getMinimumSize());
