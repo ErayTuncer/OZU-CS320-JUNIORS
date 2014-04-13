@@ -13,17 +13,17 @@ public class LevelFactory {
 		Level level = new Level();
 		level.setNumber(levelNumber);
 		level.setBricks(BrickDesignImporter.getBrickDesign(levelNumber));
-		level.setPaddle(Paddle.createPaddle(calculatePaddlesPosition()));
-		level.setBall(Ball.createBall(calculateBallPosition()));
+		level.setPaddle(Paddle.createPaddle(getInitialPositionOfPaddle()));
+		level.setBall(Ball.createBall(getInitialPositionOfBall()));
 		level.setBonuses(null); //TODO IMPLEMENT
 		return level;
 	}
 
-	private static Point calculateBallPosition() {
+	public static Point getInitialPositionOfBall() {
 		return new Point((AppFrame.WIDTH - Ball.RADIUS) / 2, (AppFrame.HEIGHT - 4 * Paddle.HEIGHT) - Ball.RADIUS);
 	}
 
-	private static Point calculatePaddlesPosition() {
+	public static Point getInitialPositionOfPaddle() {
 		return new Point((AppFrame.WIDTH - Paddle.WIDTH) / 2, AppFrame.HEIGHT - 4 * Paddle.HEIGHT);
 	}
 }

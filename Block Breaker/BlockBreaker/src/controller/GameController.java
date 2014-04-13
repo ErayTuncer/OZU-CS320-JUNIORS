@@ -7,34 +7,57 @@ import util.LevelFactory;
 import entity.Ball;
 import entity.Level;
 import entity.Paddle;
+import entity.PlayerInfo;
 import graphic.AppFrame;
 import graphic.view.GameView;
 
 public class GameController extends Thread {
 	
+	private AppController appController;
 	private GameView view;
 	private Level level;
 	private int deltaX, deltaY;
-
-	public void run() {
-		initStartDirections();	
-		view.repaint();
-		
-		while(!isBallGoneOut()) {
-			checkcollusion();
-			level.getBall().moveBall(deltaX, deltaY);			
-			pause(30);
-			view.repaint();
-		}
-		
-		// TODO : 
-		//if(playerInfo.getRemaningLives > 0) {
-		// loselife();
-		// run(); ... 
-		// } else .....
+	private PlayerInfo playerInfo;
+	
+	public GameController(AppController appController) {
+		this.appController = appController;
 	}
 
-	private void initStartDirections() {
+	public void run() {
+		initPlayerInfo();
+		initBallDirection();	
+			
+		while(true) {
+			if (isBallGoneOut()) {
+				playerInfo.remainingLife -= 1;
+				resetLevel();
+				if (playerInfo.remainingLife <= 0) {
+					break;
+				}
+			} else {
+				checkcollusion();
+				level.getBall().moveBall(deltaX, deltaY);			
+				pause(30);
+				view.repaint();
+			}
+		}
+		
+		appController.reset();
+	}
+
+	private void resetLevel() {
+		level.setBall(Ball.createBall(LevelFactory.getInitialPositionOfBall()));
+		level.setPaddle(Paddle.createPaddle(LevelFactory.getInitialPositionOfPaddle()));
+		initBallDirection();
+	}
+
+	private void initPlayerInfo() {
+		playerInfo = new PlayerInfo();
+		playerInfo.remainingLife = 3;
+		playerInfo.score = 0;
+	}
+
+	private void initBallDirection() {
 		Random rgen = new Random();
 		int degree = rgen.nextInt(61) + 60;
 		while(degree== 90) degree += rgen.nextInt(61) - 60;

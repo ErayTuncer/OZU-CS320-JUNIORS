@@ -27,9 +27,13 @@ public class AppController {
 	}
 
 	private void initilizeGameController() {
-		gameController = new GameController();
+		gameController = new GameController(this);
 		gameController.initilizeLevel(1);
 		gameController.setView(new GameView(gameController));
+	}
+	
+	public void reset() {
+		displayMenu();
 	}
 
 	public void terminate() {
