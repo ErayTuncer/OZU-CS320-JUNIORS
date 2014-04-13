@@ -1,7 +1,5 @@
 package entity;
 
-import graphic.AppFrame;
-
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -16,8 +14,6 @@ public class Ball extends Rectangle {
 	
 	private Point position;
 	private BufferedImage image;
-	private int deltaX = -5;
-	private int deltaY = -5;
 
 	public static Ball createBall(Point position){
 		Ball ball = new Ball();
@@ -36,15 +32,9 @@ public class Ball extends Rectangle {
 		}	
 	}
 	
-	public void moveBall(){
+	public void moveBall(int deltaX, int deltaY){
 		this.position.x += deltaX;
 		this.position.y += deltaY;	
-		if(this.position.x < 0 || this.position.x > AppFrame.WIDTH){
-			deltaX = -deltaX;
-		}
-		if(this.position.y < 0 || this.position.y > AppFrame.HEIGHT){
-			deltaY = -deltaY;
-		}
 	}
 	
 	public Point getPosition(){

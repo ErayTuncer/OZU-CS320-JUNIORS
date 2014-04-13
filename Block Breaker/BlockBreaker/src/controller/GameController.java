@@ -1,8 +1,5 @@
 package controller;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-
 import util.LevelFactory;
 import entity.Ball;
 import entity.Level;
@@ -14,51 +11,68 @@ public class GameController {
 	
 	private GameView view;
 	private Level level;
-	
-	
+	private int deltaX, deltaY;
 
 	public void run() {
-		//TODO : implement
+		deltaX = 5; 
+		deltaY = 5;
+		
 		view.repaint();
-		int i = 0;
-		while(i < 100) {
-			Ball ball = this.level.getBall();
-			ball.moveBall();					
-			//checkCollisionWithBricks(); //TODO : implement
-			//checkCollisionWithPaddle(); //TODO : implement
+		
+		while(!isBallGoneOut()) {
+			checkcollusion();
+
+			level.getBall().moveBall(deltaX, deltaY);
+			
 			//checkBallGoneOut(); //TODO : implement			
 			//pause(); //TODO : implement
 			view.repaint();
-			i++;
-			
 		}
 		
-	}
-	
-	private void checkBallGoneOut() {
-		Ball ball = this.level.getBall();
-		if(ball.getPosition().y > AppFrame.HEIGHT){
-			//TODO : implement
-//			loseLife(); 
-//			if(isGameOver()){
-//				terminateGame();
-//				saveHighScore(score);
-//			}
-		}
+		// TODO : 
+		//if(playerInfo.getRemaningLives > 0) {
+		// loselife();
+		// run(); ... 
+		// } else .....
 	}
 
-	private void checkCollisionWithPaddle() {
-		// TODO Auto-generated method stub
-		
+	private void checkcollusion() {
+		checkCollisionWithBricks();
+		checkCollisionWithPaddle();
+		checkCollusionWithWalls();
 	}
 
 	private void checkCollisionWithBricks() {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private void checkCollisionWithPaddle() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void checkCollusionWithWalls() {
+		Ball ball = level.getBall();
+		if(ball.getLocation().x <= 0 || ball.getLocation().x >= AppFrame.WIDTH - Ball.RADIUS) {
+			deltaX = - deltaX;
+		}
+		if(ball.getLocation().y <= 0) {
+			deltaY = - deltaY;
+		}
+		
+	}
+
+	private boolean isBallGoneOut() {
+		Ball ball = this.level.getBall();
+		if(ball.getPosition().y > AppFrame.HEIGHT){
+			return true;
+		}
+		return false;
+	}
 
 	public void pause() {
-		
+		//TODO : implement
 
 	}
 	
@@ -79,11 +93,11 @@ public class GameController {
 	}
 	
 	public void movePaddle(int x){
-		System.out.println("zaaaa");
-		if(x < this.level.getPaddle().getPosition().x){
-			this.level.getPaddle().movePaddle(-10);
-		}else if(x > this.level.getPaddle().getPosition().x){
-			this.level.getPaddle().movePaddle(10);
+		Paddle paddle = this.level.getPaddle(); 
+		if(x < paddle.getPosition().x){
+			paddle.movePaddle(-10);
+		}else if(x > paddle.getPosition().x){
+			paddle.movePaddle(10);
 		}
 		view.repaint();
 	}
