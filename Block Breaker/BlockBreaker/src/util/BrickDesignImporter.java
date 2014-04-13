@@ -39,10 +39,15 @@ public class BrickDesignImporter {
 		for (int i = 0; i < brickDesign.size(); i++) {
 			for (int j = 0; j < brickDesign.get(i).length; j++) {
 				if(brickDesign.get(i)[j] == '_'){
-					Brick brick = Brick.createBrick(brickDesign.get(i)[j], new Point(i, j));
+					Point position = calculateBricksPosition(i, j);
+					Brick brick = Brick.createBrick(brickDesign.get(i)[j], position);
 					bricks.add(brick);
 				}
 			}
 		}
+	}
+
+	private static Point calculateBricksPosition(int i, int j) {
+		return new Point(Brick.WIDTH + j * Brick.WIDTH, Brick.WIDTH + i * Brick.HEIGHT);
 	}
 }
