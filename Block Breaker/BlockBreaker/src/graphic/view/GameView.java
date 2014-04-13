@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 import controller.GameController;
+import entity.Ball;
 import entity.Brick;
 import entity.Paddle;
 
@@ -20,13 +21,12 @@ public class GameView extends View {
 	}
 	
 	@Override
-	public void paint(Graphics graphics) {
-		// TODO uncomment  
+	public void paint(Graphics graphics) { 
 		super.paint(graphics);
 		drawBackground(graphics);
 		drawBricks(graphics);
-//		drawPaddle(graphics);
-//		drawBall(graphics);
+		drawPaddle(graphics);
+		drawBall(graphics);
 	}
 
 	private void drawBackground(Graphics graphics) {
@@ -49,13 +49,15 @@ public class GameView extends View {
 		Paddle paddle = controller.getLevel().getPaddle();
 		Point position = paddle.getPosition();
 		Dimension size = paddle.getSize();
-		
+		System.out.println(position.x);
 		graphics.setColor(paddle.getColor());
 		graphics.drawRect(position.x, position.y, size.width, size.height);
 	}
 	
 	private void drawBall(Graphics graphics) {
-		//TODO : finish
+		Ball ball = controller.getLevel().getBall();
+		Point position = ball.getPosition();
+		graphics.drawImage(ball.getImage() , position.x, position.y, ball.ballRadius, ball.ballRadius, this);
 		
 	}
 	

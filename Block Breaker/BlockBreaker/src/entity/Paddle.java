@@ -15,6 +15,7 @@ public class Paddle extends Rectangle {
 	
 	public static Paddle createPaddle(Point position) {
 		Paddle paddle = new Paddle();
+		paddle.position = position;
 		paddle.setBounds(position.x, position.y, WIDTH, HEIGHT);
 		paddle.setColor(COLOR);
 		return paddle;
