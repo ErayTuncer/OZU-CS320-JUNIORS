@@ -6,7 +6,10 @@ public class Level {
 	private int number;
 	private ArrayList<Brick> bricks;
 	private Paddle paddle;
+	private Ball ball;
 	private ArrayList<Bonus> bonuses;
+	
+	
 	
 	public int getNumber() {
 		return number;
@@ -32,5 +35,10 @@ public class Level {
 	public void setBonuses(ArrayList<Bonus> bonuses) {
 		this.bonuses = bonuses;
 	}
-	
+	public Ball getBall() {
+		return ball;
+	}
+	public void setBall(Ball ball) {
+		this.ball = ball;
+	}
 }

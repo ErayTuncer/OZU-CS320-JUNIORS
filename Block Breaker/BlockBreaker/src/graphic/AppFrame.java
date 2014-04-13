@@ -7,10 +7,12 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class AppFrame extends JFrame {
+	public static final int  WIDTH = 800;
+	public static final int HEIGHT = 600;
 	
 	public AppFrame(){
 		setTitle("CS320-Juniors-BlockBreaker");
-		Dimension size = new Dimension(800, 600);
+		Dimension size = new Dimension(WIDTH, HEIGHT);
 		setSize(size);
 		setPreferredSize(size);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

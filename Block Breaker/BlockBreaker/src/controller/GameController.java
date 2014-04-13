@@ -1,5 +1,6 @@
 package controller;
 
+import util.LevelFactory;
 import entity.Level;
 import graphic.view.GameView;
 
@@ -12,6 +13,9 @@ public class GameController extends Thread {
 
 	public void run() {
 		//TODO : implement
+		while(true) {
+			
+		}
 		
 	}
 	
@@ -28,8 +32,7 @@ public class GameController extends Thread {
 	}
 
 	public void initilizeLevel(int levelNumber) {
-		// TODO Auto-generated method stub
-		
+		level = LevelFactory.createLevel(levelNumber);
 	}
 
 }
