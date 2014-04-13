@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import controller.GameController;
@@ -12,12 +14,13 @@ import entity.Brick;
 import entity.Paddle;
 
 
-public class GameView extends View {
+public class GameView extends View implements MouseMotionListener{
 	
 	private GameController controller;
 	
 	public GameView(GameController controller) {
 		this.controller = controller;
+		addMouseMotionListener(this);
 	}
 	
 	@Override
@@ -59,6 +62,16 @@ public class GameView extends View {
 		Point position = ball.getPosition();
 		
 		graphics.drawImage(ball.getImage() , position.x, position.y, ball.RADIUS, ball.RADIUS, this);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		//controller.movePaddle(e.getX());
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		controller.movePaddle(e.getX());
 	}
 	
 }

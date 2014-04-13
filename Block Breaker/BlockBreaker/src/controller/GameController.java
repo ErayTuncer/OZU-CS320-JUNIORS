@@ -1,8 +1,12 @@
 package controller;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+
 import util.LevelFactory;
 import entity.Ball;
 import entity.Level;
+import entity.Paddle;
 import graphic.AppFrame;
 import graphic.view.GameView;
 
@@ -22,8 +26,7 @@ public class GameController {
 			ball.moveBall();					
 			//checkCollisionWithBricks(); //TODO : implement
 			//checkCollisionWithPaddle(); //TODO : implement
-			//checkBallGoneOut(); //TODO : implement
-			
+			//checkBallGoneOut(); //TODO : implement			
 			//pause(); //TODO : implement
 			view.repaint();
 			i++;
@@ -73,6 +76,16 @@ public class GameController {
 
 	public void initilizeLevel(int levelNumber) {
 		level = LevelFactory.createLevel(levelNumber);
+	}
+	
+	public void movePaddle(int x){
+		System.out.println("zaaaa");
+		if(x < this.level.getPaddle().getPosition().x){
+			this.level.getPaddle().movePaddle(-10);
+		}else if(x > this.level.getPaddle().getPosition().x){
+			this.level.getPaddle().movePaddle(10);
+		}
+		view.repaint();
 	}
 
 }
