@@ -24,7 +24,7 @@ public class Ball extends Rectangle {
 	
 	private void setImage() {
 		try{
-			BufferedImage img = ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "ball2.png"));
+			BufferedImage img = ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "ball.png"));
 			this.image = img;
 		}catch (IOException e) {
 			System.err.println("Image NOT found.");
