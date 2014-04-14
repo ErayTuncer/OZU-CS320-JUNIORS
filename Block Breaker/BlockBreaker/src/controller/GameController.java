@@ -46,7 +46,7 @@ public class GameController extends Thread {
 					break;
 				}
 			} else {
-				checkcollusion();
+				checkCollision();
 				level.getBall().moveBall(deltaX, deltaY);			
 				pause(30);
 				view.repaint();
@@ -86,10 +86,10 @@ public class GameController extends Thread {
 		deltaY = (int) Math.ceil((5.0 * Math.sin(Math.toRadians(degree)))) * -1;
 	}
 
-	private void checkcollusion() {
+	private void checkCollision() {
 		checkCollisionWithBricks();
 		checkCollisionWithPaddle();
-		checkCollusionWithWalls();
+		checkCollisionWithWalls();
 	}
 
 	private void checkCollisionWithBricks() {
@@ -137,7 +137,7 @@ public class GameController extends Thread {
 		return (ballX + Ball.RADIUS / 2) > paddleX && (ballX + Ball.RADIUS / 2) <= paddleX + Paddle.WIDTH;
 	}
 
-	private void checkCollusionWithWalls() {
+	private void checkCollisionWithWalls() {
 		Point ballLocation = level.getBall().getLocation();
 		if(ballLocation.x <= 0) deltaX = Math.abs(deltaX);
 		if(ballLocation.x >= view.getWidth() - Ball.RADIUS) deltaX = - Math.abs(deltaX);
