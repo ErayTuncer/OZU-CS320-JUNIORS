@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.font.NumericShaper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class GameController extends Thread {
 	private PlayerInfo playerInfo;
 	
 	private int BONUS_POINT = 50;
+	private int numberOfBricks;
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -45,7 +47,12 @@ public class GameController extends Thread {
 					setHighestScore();
 					break;
 				}
-			} else {
+			} else if(numberOfBricks == 0){
+				int levelNo = level.getNumber();
+				levelNo++;
+				level.setNumber(levelNo);
+				initilizeLevel(level.getNumber());
+			}else{
 				checkCollision();
 				level.getBall().moveBall(deltaX, deltaY);			
 				pause(30);
@@ -96,7 +103,10 @@ public class GameController extends Thread {
 		for (int i = 0; i < level.getBricks().size(); i++) {
 			Brick brick = level.getBricks().get(i);
 			checkCollisionWithBrick(brick);
-			if(brick.getHealth() == 0) level.getBricks().remove(brick);			
+			if(brick.getHealth() == 0)  {
+				level.getBricks().remove(brick);
+				numberOfBricks--;
+			}			
 		}		
 	}
 	
@@ -126,6 +136,18 @@ public class GameController extends Thread {
 		
 		if(isOnSameXDirection(paddleLocation.x, ballLocation.x) && isOnSameYDirection(paddleLocation.y, ballLocation.y)) {
 			deltaY = - Math.abs(deltaY);
+			ballLocation.x += level.getBall().getBounds().width/2;
+			double gap = ballLocation.x - paddleLocation.x;
+			if (gap < level.getPaddle().width/2){
+				double ratio = gap / level.getPaddle().width/2;
+				deltaX = (int) - (5.0 / (ratio*6));
+			}else if(gap > level.getPaddle().width/2){
+				double ratio = (level.getPaddle().width - gap) / level.getPaddle().width/2;
+				deltaX = (int) + (5.0 / (ratio*6));
+			}else{
+				deltaX = 0;
+				return;
+			}
 		}
 	}
 
@@ -178,6 +200,7 @@ public class GameController extends Thread {
 
 	public void initilizeLevel(int levelNumber) {
 		level = LevelFactory.createLevel(levelNumber);
+		numberOfBricks = level.getNumberOfBricks();
 	}
 	
 	public void movePaddle(int x){

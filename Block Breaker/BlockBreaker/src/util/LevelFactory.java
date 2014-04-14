@@ -16,6 +16,7 @@ public class LevelFactory {
 		level.setPaddle(Paddle.createPaddle(getInitialPositionOfPaddle()));
 		level.setBall(Ball.createBall(getInitialPositionOfBall()));
 		level.setBonuses(null); //TODO IMPLEMENT
+		level.setNumberOfBricks(BrickDesignImporter.getNumOfBreakableBricks());
 		return level;
 	}
 
