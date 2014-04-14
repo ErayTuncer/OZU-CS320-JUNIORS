@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,8 +26,8 @@ public class GameController extends Thread {
 	private Level level;
 	private int deltaX, deltaY;
 	private PlayerInfo playerInfo;
+	
 	private int BONUS_POINT = 50;
-	private static String DESIGN_DIRECTORY_PATH = "assets/brickDesigns/";
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -61,6 +62,7 @@ public class GameController extends Thread {
 				highScoreWriter.print(getPlayerInfo().score);
 				highScoreWriter.close();
 			} catch (FileNotFoundException e) {
+				System.err.println("Cannot find the highscore file!");
 			}		
 	}
 
@@ -91,52 +93,30 @@ public class GameController extends Thread {
 	}
 
 	private void checkCollisionWithBricks() {
-		Point ballLocation = level.getBall().getLocation();
-		ArrayList<Brick> bricks = level.getBricks();
-		for(int i = 0; i< bricks.size(); i++){
-			Brick brick = bricks.get(i);
-			Point brickLocation = brick.getLocation();
-			checkTopCollision(ballLocation, brickLocation, brick); // Is balls top hitting any brick
-			checkBottomCollision(ballLocation, brickLocation, brick);
-			checkLeftCollision(ballLocation, brickLocation, brick);
-			checkRightCollision(ballLocation, brickLocation, brick);
-		}
-		
+		for (int i = 0; i < level.getBricks().size(); i++) {
+			Brick brick = level.getBricks().get(i);
+			checkCollisionWithBrick(brick);
+			if(brick.getHealth() == 0) level.getBricks().remove(brick);			
+		}		
 	}
 	
-	private void checkRightCollision(Point ballLocation, Point brickLocation, Brick brick) {
-		if((ballLocation.x + Ball.RADIUS == brickLocation.x) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
-			level.getBricks().remove(brick);
-			getPlayerInfo().score += BONUS_POINT;
-			deltaX = -Math.abs(deltaX);
-			deltaY = -Math.abs(deltaY);
-		}
-	}
-
-	private void checkLeftCollision(Point ballLocation, Point brickLocation,Brick brick) {
-		if((ballLocation.x == brickLocation.x + Brick.WIDTH) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
-			level.getBricks().remove(brick);
-			getPlayerInfo().score += BONUS_POINT;
-			deltaX = -Math.abs(deltaX);
-			deltaY = -Math.abs(deltaY);
-		}
-	}
-
-	private void checkBottomCollision(Point ballLocation, Point brickLocation, Brick brick) {
-		if((ballLocation.y + Ball.RADIUS == brickLocation.y) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
-			level.getBricks().remove(brick);
-			getPlayerInfo().score += BONUS_POINT;
-			deltaX = Math.abs(deltaX);
-			deltaY = - Math.abs(deltaY);
-		}
-	}
-
-	private void checkTopCollision(Point ballLocation, Point brickLocation, Brick brick) {
-		if((ballLocation.y == brickLocation.y + Brick.HEIGHT) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
-			level.getBricks().remove(brick);
-			getPlayerInfo().score += BONUS_POINT;
-			deltaX = - Math.abs(deltaX);
-			deltaY = Math.abs(deltaY);
+	// This part is adapted from "http://stackoverflow.com/questions/18418125/java-brickbreaker-paddle-collision-detection"
+	private void checkCollisionWithBrick(Brick brick) {
+		Ball ball = level.getBall();
+		if(ball.getBounds().intersects(brick.getBounds())){
+			Rectangle intersection = ball.getBounds().intersection(brick.getBounds());
+			if (intersection.width >= intersection.height){
+				ball.setLocation(ball.getLocation().x, ball.getLocation().y - (Math.abs(deltaY)/deltaY) * intersection.height);
+				deltaY = - deltaY;
+			}
+			if (intersection.height >= intersection.width){
+				ball.setLocation(ball.getLocation().x- (Math.abs(deltaX)/deltaX) * intersection.width, ball.getLocation().y);
+				deltaX = - deltaX;
+			}
+			if(brick.getType() != Brick.UNBREAKABLE) {
+				getPlayerInfo().score += BONUS_POINT;
+				brick.reduceHealth();
+			}
 		}
 	}
 

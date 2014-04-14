@@ -52,42 +52,56 @@ public class Brick extends Rectangle {
 	private void initilizeImage() {
 		try {
 			if (type == UNBREAKABLE) {
-				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "unbreakable.png")));
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "unbreakable" + health + ".png")));
 			} else if (type == WEAK) {
-				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "weak.png")));
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "weak" + health + ".png")));
 			} else if (type == STRONG) {
-				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "strong.png")));
+				setImage(ImageIO.read(new File(IMAGE_DIRECTORY_PATH + "strong" + health + ".png")));
 			} else {
 				throw new RuntimeException("Brick type is WRONG.");
 			}	
 		} catch (IOException e) {
-			System.err.println("Image NOT found.");
+			System.err.println("Image NOT found. (" + toString() + ")");
 		}
 	}
-
-	public int getHealth() {
-		return health;
-	}
-
-
-	public void setHealth(int health) {
+	
+	private void setHealth(int health) {
 		this.health = health;
 	}
-
 
 	public BufferedImage getImage() {
 		return image;
 	}
 
-
-	public void setImage(BufferedImage image) {
+	private void setImage(BufferedImage image) {
 		this.image = image;
 	}
 	
-
 	public int getType() {
 		return type;
+	}
+
+	public int getHealth(){
+		return health;
+	}
+	
+	public void reduceHealth() {
+		if(health > 0) {
+			health--;
+		}
+		update();
 	}	
+	
+	private void update() {
+		if (health > 0) {
+			initilizeImage();
+		}
+	}
+
+	@Override
+	public String toString() {		
+		return String.format("Brick Type : %d -> X : %d Y: %d -> W : %d H : %d -> Health : %d", type, x, y, width, height, health);
+	}
 	
 }
 
