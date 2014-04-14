@@ -1,8 +1,13 @@
 package controller;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 import util.LevelFactory;
 import entity.Ball;
@@ -20,6 +25,8 @@ public class GameController extends Thread {
 	private Level level;
 	private int deltaX, deltaY;
 	private PlayerInfo playerInfo;
+	private int BONUS_POINT = 50;
+	private static String DESIGN_DIRECTORY_PATH = "assets/brickDesigns/";
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -34,6 +41,7 @@ public class GameController extends Thread {
 				playerInfo.remainingLife -= 1;
 				resetLevel();
 				if (playerInfo.remainingLife <= 0) {
+					setHighestScore();
 					break;
 				}
 			} else {
@@ -45,6 +53,15 @@ public class GameController extends Thread {
 		}
 		
 		appController.reset();
+	}
+
+	private void setHighestScore() {
+			try {
+				PrintWriter highScoreWriter = new PrintWriter(new File("assets/highscore"));
+				highScoreWriter.print(getPlayerInfo().score);
+				highScoreWriter.close();
+			} catch (FileNotFoundException e) {
+			}		
 	}
 
 	private void resetLevel() {
@@ -90,6 +107,7 @@ public class GameController extends Thread {
 	private void checkRightCollision(Point ballLocation, Point brickLocation, Brick brick) {
 		if((ballLocation.x + Ball.RADIUS == brickLocation.x) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
 			level.getBricks().remove(brick);
+			getPlayerInfo().score += BONUS_POINT;
 			deltaX = -Math.abs(deltaX);
 			deltaY = -Math.abs(deltaY);
 		}
@@ -98,6 +116,7 @@ public class GameController extends Thread {
 	private void checkLeftCollision(Point ballLocation, Point brickLocation,Brick brick) {
 		if((ballLocation.x == brickLocation.x + Brick.WIDTH) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
 			level.getBricks().remove(brick);
+			getPlayerInfo().score += BONUS_POINT;
 			deltaX = -Math.abs(deltaX);
 			deltaY = -Math.abs(deltaY);
 		}
@@ -106,6 +125,7 @@ public class GameController extends Thread {
 	private void checkBottomCollision(Point ballLocation, Point brickLocation, Brick brick) {
 		if((ballLocation.y + Ball.RADIUS == brickLocation.y) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
 			level.getBricks().remove(brick);
+			getPlayerInfo().score += BONUS_POINT;
 			deltaX = Math.abs(deltaX);
 			deltaY = - Math.abs(deltaY);
 		}
@@ -114,6 +134,7 @@ public class GameController extends Thread {
 	private void checkTopCollision(Point ballLocation, Point brickLocation, Brick brick) {
 		if((ballLocation.y == brickLocation.y + Brick.HEIGHT) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
 			level.getBricks().remove(brick);
+			getPlayerInfo().score += BONUS_POINT;
 			deltaX = - Math.abs(deltaX);
 			deltaY = Math.abs(deltaY);
 		}
