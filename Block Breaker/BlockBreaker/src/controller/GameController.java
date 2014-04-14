@@ -1,10 +1,12 @@
 package controller;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Random;
 
 import util.LevelFactory;
 import entity.Ball;
+import entity.Brick;
 import entity.Level;
 import entity.Paddle;
 import entity.PlayerInfo;
@@ -72,10 +74,51 @@ public class GameController extends Thread {
 	}
 
 	private void checkCollisionWithBricks() {
-		// TODO Auto-generated method stub
+		Point ballLocation = level.getBall().getLocation();
+		ArrayList<Brick> bricks = level.getBricks();
+		for(int i = 0; i< bricks.size(); i++){
+			Brick brick = bricks.get(i);
+			Point brickLocation = brick.getLocation();
+			checkTopCollision(ballLocation, brickLocation, brick); // Is balls top hitting any brick
+			checkBottomCollision(ballLocation, brickLocation, brick);
+			checkLeftCollision(ballLocation, brickLocation, brick);
+			checkRightCollision(ballLocation, brickLocation, brick);
+		}
 		
 	}
 	
+	private void checkRightCollision(Point ballLocation, Point brickLocation, Brick brick) {
+		if((ballLocation.x + Ball.RADIUS == brickLocation.x) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
+			level.getBricks().remove(brick);
+			deltaX = -Math.abs(deltaX);
+			deltaY = -Math.abs(deltaY);
+		}
+	}
+
+	private void checkLeftCollision(Point ballLocation, Point brickLocation,Brick brick) {
+		if((ballLocation.x == brickLocation.x + Brick.WIDTH) &&(ballLocation.y + Ball.RADIUS/2 > brickLocation.y && ballLocation.y + Ball.RADIUS/2 < brickLocation.y + Brick.HEIGHT)){
+			level.getBricks().remove(brick);
+			deltaX = -Math.abs(deltaX);
+			deltaY = -Math.abs(deltaY);
+		}
+	}
+
+	private void checkBottomCollision(Point ballLocation, Point brickLocation, Brick brick) {
+		if((ballLocation.y + Ball.RADIUS == brickLocation.y) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
+			level.getBricks().remove(brick);
+			deltaX = Math.abs(deltaX);
+			deltaY = - Math.abs(deltaY);
+		}
+	}
+
+	private void checkTopCollision(Point ballLocation, Point brickLocation, Brick brick) {
+		if((ballLocation.y == brickLocation.y + Brick.HEIGHT) &&(ballLocation.x + Ball.RADIUS/2 > brickLocation.x && ballLocation.x + Ball.RADIUS/2 < brickLocation.x + Brick.WIDTH)){
+			level.getBricks().remove(brick);
+			deltaX = - Math.abs(deltaX);
+			deltaY = Math.abs(deltaY);
+		}
+	}
+
 	private void checkCollisionWithPaddle() {
 		Point paddleLocation = level.getPaddle().getLocation();
 		Point ballLocation = level.getBall().getLocation();
