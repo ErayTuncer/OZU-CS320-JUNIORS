@@ -2,15 +2,9 @@ package controller;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.font.NumericShaper;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
+import util.HighestScore;
 import util.LevelFactory;
 import entity.Ball;
 import entity.Brick;
@@ -28,8 +22,8 @@ public class GameController extends Thread {
 	private int deltaX, deltaY;
 	private PlayerInfo playerInfo;
 	
-	private int BONUS_POINT = 50;
-	private int numberOfBricks;
+
+	private int numberOfBreakableBricks;
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -47,11 +41,13 @@ public class GameController extends Thread {
 					setHighestScore();
 					break;
 				}
-			} else if(numberOfBricks == 0){
-				int levelNo = level.getNumber();
-				levelNo++;
-				level.setNumber(levelNo);
-				initilizeLevel(level.getNumber());
+			} else if(numberOfBreakableBricks == 0){
+				int newLevelNo = level.getNumber() + 1;
+				initilizeLevel(newLevelNo);
+				if(level.getNumber() == 10) {
+					setHighestScore();
+					break;
+				}
 			}else{
 				checkCollision();
 				level.getBall().moveBall(deltaX, deltaY);			
@@ -64,13 +60,8 @@ public class GameController extends Thread {
 	}
 
 	private void setHighestScore() {
-			try {
-				PrintWriter highScoreWriter = new PrintWriter(new File("assets/highscore"));
-				highScoreWriter.print(getPlayerInfo().score);
-				highScoreWriter.close();
-			} catch (FileNotFoundException e) {
-				System.err.println("Cannot find the highscore file!");
-			}		
+		if(HighestScore.readHighestscore() < getPlayerInfo().score)
+			HighestScore.writeHighestScore(getPlayerInfo().score);
 	}
 
 	private void resetLevel() {
@@ -105,7 +96,7 @@ public class GameController extends Thread {
 			checkCollisionWithBrick(brick);
 			if(brick.getHealth() == 0)  {
 				level.getBricks().remove(brick);
-				numberOfBricks--;
+				numberOfBreakableBricks--;
 			}			
 		}		
 	}
@@ -124,7 +115,7 @@ public class GameController extends Thread {
 				deltaX = - deltaX;
 			}
 			if(brick.getType() != Brick.UNBREAKABLE) {
-				getPlayerInfo().score += BONUS_POINT;
+				getPlayerInfo().score += Level.BONUS_POINT;
 				brick.reduceHealth();
 			}
 		}
@@ -200,7 +191,7 @@ public class GameController extends Thread {
 
 	public void initilizeLevel(int levelNumber) {
 		level = LevelFactory.createLevel(levelNumber);
-		numberOfBricks = level.getNumberOfBricks();
+		numberOfBreakableBricks = level.getNumberOfBricks();
 	}
 	
 	public void movePaddle(int x){

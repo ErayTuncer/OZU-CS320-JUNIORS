@@ -9,9 +9,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import util.HighestScore;
 import controller.AppController;
-import entity.PlayerInfo;
-
 
 public class MenuView extends View implements ActionListener {	
 	
@@ -33,7 +32,7 @@ public class MenuView extends View implements ActionListener {
 
 		add(startGameButton);
 		
-		JLabel highestScoreLabel = new JLabel("Highest score : " + PlayerInfo.readHighscoreFromFile());
+		JLabel highestScoreLabel = new JLabel("Highest score : " + HighestScore.readHighestscore());
 		highestScoreLabel.setForeground(Color.WHITE);
 		highestScoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		add(highestScoreLabel);

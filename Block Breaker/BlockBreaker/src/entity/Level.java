@@ -3,14 +3,15 @@ package entity;
 import java.util.ArrayList;
 
 public class Level {
+	public static int BONUS_POINT = 50;
+	
 	private int number;
 	private ArrayList<Brick> bricks;
 	private Paddle paddle;
 	private Ball ball;
 	private ArrayList<Bonus> bonuses;
 	private int numberOfBricks;
-	
-	
+
 	public int getNumber() {
 		return number;
 	}
