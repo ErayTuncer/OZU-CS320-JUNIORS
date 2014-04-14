@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 public class Ball extends Rectangle {
 	public static final int RADIUS = 20;
-	private static final String IMAGE_DIRECTORY_PATH = "assets/BallImage/";
+	private static final String IMAGE_DIRECTORY_PATH = "assets/ballImage/";
 	
 	private BufferedImage image;
 
