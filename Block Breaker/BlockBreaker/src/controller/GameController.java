@@ -143,17 +143,18 @@ public class GameController extends Thread {
 		if(isOnSameXDirection(paddleLocation.x, ballLocation.x) && isOnSameYDirection(paddleLocation.y, ballLocation.y)) {
 			deltaY = - Math.abs(deltaY);
 			ballLocation.x += level.getBall().getBounds().width/2;
-//			double gap = ballLocation.x - paddleLocation.x;
-//			if (gap < level.getPaddle().width/2){
-//				double ratio = gap / level.getPaddle().width/2;
-//				deltaX = (int) - (5.0 / (ratio*6));
-//			}else if(gap > level.getPaddle().width/2){
-//				double ratio = (level.getPaddle().width - gap) / level.getPaddle().width/2;
-//				deltaX = (int) + (5.0 / (ratio*6));
-//			}else{
-//				deltaX = 0;
-//				return;
-//			}
+			double gap = ballLocation.x - paddleLocation.x;
+			
+			if (gap < level.getPaddle().width/2){
+				deltaX = (int) (-5.0/(gap/((level.getPaddle().width*1.0)/(2*5.0))));
+			}else if(gap > level.getPaddle().width/2){
+				gap = (paddleLocation.x+level.getPaddle().width) -ballLocation.x;
+				deltaX = (int) (5.0/(gap/((level.getPaddle().width*1.0)/(2*5.0))));
+
+			}else{
+				deltaX = 0;
+				return;
+			}
 		}
 		
 		Paddle paddle = level.getPaddle();
