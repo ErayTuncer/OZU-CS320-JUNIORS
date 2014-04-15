@@ -14,7 +14,6 @@ public class Bonus extends Rectangle {
 	private Point position;
 	private BufferedImage image;
 	private static int width = 50, height = 10;
-	private int speed = -2;
 	
 	public static Bonus createBonus (Point position, int bonusType, BufferedImage img) {
 		Bonus bonus = new Bonus();
