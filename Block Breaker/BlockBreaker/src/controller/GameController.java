@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.Random;
 
 import util.HighestScore;
@@ -27,6 +26,7 @@ public class GameController extends Thread {
 	private int bricksDestroyed = 0;
 	private Bonus bonus;
 	private boolean gotBonus = false;
+	private int brokenBreakAmountForBonus = 10;
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -121,17 +121,20 @@ public class GameController extends Thread {
 				deltaX = - deltaX;
 			}
 			if(brick.getType() != Brick.UNBREAKABLE) {
-				getPlayerInfo().score += Level.BONUS_POINT;
-				brick.reduceHealth();
-				if(brick.getHealth() == 0) {
-					bricksDestroyed++;
-					if(bricksDestroyed == 10) {
-						System.out.println(brick.getLocation().x + " " + brick.getLocation().y);
-						bonus = Bonus.createBonus(brick.getLocation(), new Random().nextInt(3), brick.getImage());
-						bricksDestroyed = 0;
-						gotBonus = true;
-					}
-				}
+				processValidHitTo(brick);
+			}
+		}
+	}
+
+	private void processValidHitTo(Brick brick) {
+		getPlayerInfo().score += Level.BONUS_POINT;
+		brick.reduceHealth();
+		if(brick.getHealth() == 0) {
+			bricksDestroyed++;
+			if(bricksDestroyed == brokenBreakAmountForBonus) {
+				bonus = Bonus.createBonus(brick.getLocation(), new Random().nextInt(3), brick.getImage());
+				bricksDestroyed = 0;
+				gotBonus = true;
 			}
 		}
 	}

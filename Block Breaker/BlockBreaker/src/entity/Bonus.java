@@ -11,7 +11,6 @@ public class Bonus extends Rectangle {
 	public static final int PADDLE_SMALLER = 2;
 	
 	private int bonusType;
-	private Point position;
 	private BufferedImage image;
 	private static int width = 50, height = 10;
 	
