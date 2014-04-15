@@ -2,11 +2,13 @@ package controller;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Random;
 
 import util.HighestScore;
 import util.LevelFactory;
 import entity.Ball;
+import entity.Bonus;
 import entity.Brick;
 import entity.Level;
 import entity.Paddle;
@@ -21,9 +23,10 @@ public class GameController extends Thread {
 	private Level level;
 	private int deltaX, deltaY;
 	private PlayerInfo playerInfo;
-	
-
 	private int numberOfBreakableBricks;
+	private int bricksDestroyed = 0;
+	private Bonus bonus;
+	private boolean gotBonus = false;
 	
 	public GameController(AppController appController) {
 		this.appController = appController;
@@ -34,6 +37,9 @@ public class GameController extends Thread {
 		initBallDirection();	
 			
 		while(true) {
+			if(gotBonus) {
+				bonus.setLocation(bonus.getLocation().x, bonus.getLocation().y + 2);
+			}
 			if (isBallGoneOut()) {
 				playerInfo.remainingLife -= 1;
 				resetLevel();
@@ -55,7 +61,6 @@ public class GameController extends Thread {
 				view.repaint();
 			}
 		}
-		
 		appController.reset();
 	}
 
@@ -91,6 +96,7 @@ public class GameController extends Thread {
 	}
 
 	private void checkCollisionWithBricks() {
+
 		for (int i = 0; i < level.getBricks().size(); i++) {
 			Brick brick = level.getBricks().get(i);
 			checkCollisionWithBrick(brick);
@@ -117,6 +123,15 @@ public class GameController extends Thread {
 			if(brick.getType() != Brick.UNBREAKABLE) {
 				getPlayerInfo().score += Level.BONUS_POINT;
 				brick.reduceHealth();
+				if(brick.getHealth() == 0) {
+					bricksDestroyed++;
+					if(bricksDestroyed == 10) {
+						System.out.println(brick.getLocation().x + " " + brick.getLocation().y);
+						bonus = Bonus.createBonus(brick.getLocation(), new Random().nextInt(3), brick.getImage());
+						bricksDestroyed = 0;
+						gotBonus = true;
+					}
+				}
 			}
 		}
 	}
@@ -139,6 +154,25 @@ public class GameController extends Thread {
 //				deltaX = 0;
 //				return;
 //			}
+		}
+		
+		Paddle paddle = level.getPaddle();
+		if(gotBonus && bonus.getBounds().intersects(level.getPaddle().getBounds())) {
+			switch (bonus.getType()){
+			case 0:
+				paddle.setBounds(paddle.x, paddle.y, paddle.width - 20, paddle.height);
+				break;
+			case 1:
+				paddle.setBounds(paddle.x, paddle.y, paddle.width + 20, paddle.height);
+				break;
+			case 2:
+				level.getBallzOfSteel().add(Ball.createBall(new Point(100, 100)));
+				break;
+			default:
+				break;
+			}
+			gotBonus = false;
+			resetBonus();
 		}
 	}
 
@@ -163,6 +197,10 @@ public class GameController extends Thread {
 			return true;
 		}
 		return false;
+	}
+	
+	private void resetBonus() {
+		bonus.setLocation(-100, -100);
 	}
 
 	public void pause(int time) {
@@ -200,6 +238,14 @@ public class GameController extends Thread {
 			paddle.setLocation(x - paddle.getSize().width / 2, paddle.y);
 		}
 		view.repaint();
+	}
+
+	public Bonus getBonus() {
+		return bonus;
+	}
+
+	public boolean isGotBonus() {
+		return gotBonus;
 	}
 
 }

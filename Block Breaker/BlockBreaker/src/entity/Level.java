@@ -10,6 +10,7 @@ public class Level {
 	private Paddle paddle;
 	private Ball ball;
 	private ArrayList<Bonus> bonuses;
+	private ArrayList<Ball> ballzOfSteel = new ArrayList<Ball>();
 	private int numberOfBricks;
 
 	public int getNumber() {
@@ -47,5 +48,8 @@ public class Level {
 	}
 	public void setNumberOfBricks(int numOfBreakableBricks) {
 		this.numberOfBricks=numOfBreakableBricks;	
+	}
+	public ArrayList<Ball> getBallzOfSteel() {
+		return ballzOfSteel;
 	}
 }

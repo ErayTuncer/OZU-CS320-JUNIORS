@@ -13,7 +13,7 @@ public class Bonus extends Rectangle {
 	private int bonusType;
 	private Point position;
 	private BufferedImage image;
-	private static int width = 100, height = 10;
+	private static int width = 50, height = 10;
 	private int speed = -2;
 	
 	public static Bonus createBonus (Point position, int bonusType, BufferedImage img) {
@@ -40,10 +40,5 @@ public class Bonus extends Rectangle {
 	public BufferedImage getImage() {
 		return image;
 	}
-	
-	public void moveBonus(){
-		this.position.y += speed;
-	}
-	
 }
 
