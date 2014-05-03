@@ -10,6 +10,8 @@
 
 @interface OzuShuttleV2ViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+
 - (IBAction)showButtonClicked;
 
 @end

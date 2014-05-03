@@ -9,8 +9,12 @@
 #import "OzuShuttleV2ViewController.h"
 #import "ShuttleHoursViewController.h"
 @interface OzuShuttleV2ViewController ()
+
+@property(nonatomic) NSMutableArray *shutleDays;
 @property(nonatomic) NSString *source;
 @property(nonatomic) NSString *destination;
+@property(nonatomic) NSString *dayType;
+@property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
 
@@ -19,9 +23,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initializeDayOptions];
     [self.pickerView selectRow:1 inComponent:1 animated:YES];
     self.source = @"Altunizade";
     self.destination = @"Çekmeköy";
+    self.dayType = @"Weekdays";
+    [self initMapImageScrollView];
 
 }
 - (void)didReceiveMemoryWarning
@@ -33,6 +40,13 @@
 {
     [super viewDidAppear:animated];
 
+}
+
+-(void) initializeDayOptions{
+    self.shutleDays = [[ NSMutableArray alloc] init];
+    [self.shutleDays addObject:@"Weekdays"];
+    [self.shutleDays addObject:@"Weekends"];
+    [self.shutleDays addObject:@"Holidays"];
 }
 
 #pragma mark - Picker View
@@ -104,15 +118,37 @@
 
 }
 
-- (IBAction)showButtonClicked {
+- (void) initMapImageScrollView
+{
+    for (UIView* view in self.scrollView.subviews) {
+        [view removeFromSuperview];
+    }
     
-    
+    int startX = 0;
+    for (NSString *option in self.shutleDays){
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(startX,0,self.scrollView.bounds.size.width,self.scrollView.bounds.size.height)];
+        label.numberOfLines = 0;
+        label.text = option;
+        startX += label.bounds.size.width;
+        label.backgroundColor = [UIColor clearColor];
+        [self.scrollView addSubview:label];
+    }
+    self.scrollView.contentSize = CGSizeMake(startX, self.scrollView.bounds.size.height);
 }
+
+- (IBAction)showButtonClicked {
+
+}
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    int scrollViewIndex = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    self.dayType = [self.shutleDays objectAtIndex:scrollViewIndex];
     if([segue.identifier isEqualToString:@"show"]){
         ShuttleHoursViewController *vc = segue.destinationViewController;
         vc.source = self.source;
         vc.destination = self.destination;
+        vc.dayType = self.dayType;
     }
 }
+
 @end

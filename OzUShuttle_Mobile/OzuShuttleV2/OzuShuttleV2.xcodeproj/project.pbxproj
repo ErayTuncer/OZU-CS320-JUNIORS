@@ -211,6 +211,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = OzuShuttleV2;
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Can.Computer;
 			};
@@ -460,6 +461,7 @@
 				7BC87950190EC86A002C9779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7BC87951190EC86A002C9779 /* Build configuration list for PBXNativeTarget "OzuShuttleV2Tests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +470,7 @@
 				7BC87953190EC86A002C9779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
