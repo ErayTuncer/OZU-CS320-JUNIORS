@@ -28,7 +28,7 @@ public class ShuttleHttpHandler extends AbstractHandler {
         httpResponse.setStatus(HttpServletResponse.SC_OK);
         
         String route = getRoute(target);
-        if (Schedule.hasRoute(route)) {
+        if (Route.hasRoute(route)) {
             baseRequest.setHandled(true);
         	writeSchedule(ScheduleReader.read(route), httpResponse);	
         } else {
