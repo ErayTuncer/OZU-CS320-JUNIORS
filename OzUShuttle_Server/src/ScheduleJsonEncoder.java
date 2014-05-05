@@ -10,7 +10,9 @@ public class ScheduleJsonEncoder {
 		scheduleJson.put("route", schedule.route);
 		scheduleJson.put("departureLocation", schedule.departureLocation);	
 		scheduleJson.put("destinationLocation", schedule.destinationLocation);		
-		scheduleJson.put("departureHours", getJsonArray(schedule.departureHours));
+		scheduleJson.put("weekdayHours", getJsonArray(schedule.weekdayHours));
+		scheduleJson.put("weekendHours", getJsonArray(schedule.weekendHours));
+		scheduleJson.put("holidayHours", getJsonArray(schedule.holidayHours));
 		
 		return scheduleJson;
 	}
