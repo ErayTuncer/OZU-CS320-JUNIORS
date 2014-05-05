@@ -8,6 +8,8 @@
 
 #import "OzuShuttleV2ViewController.h"
 #import "ShuttleHoursViewController.h"
+#import "MultiDialViewController.h"
+
 @interface OzuShuttleV2ViewController ()
 
 @property(nonatomic) NSMutableArray *shutleDays;
@@ -29,6 +31,9 @@
     self.destination = @"Çekmeköy";
     self.dayType = @"Weekdays";
     [self initMapImageScrollView];
+    
+    [self addCustomSpinner];
+    
 
 }
 - (void)didReceiveMemoryWarning
@@ -41,6 +46,19 @@
     [super viewDidAppear:animated];
 
 }
+- (void) addCustomSpinner{
+    self.multiDialController = [[MultiDialViewController alloc] init];
+    self.multiDialController.delegate = self;
+    self.multiDialController.view.frame = CGRectOffset(self.multiDialController.view.frame, 0.0, 0);
+    [self.spinnerView addSubview:self.multiDialController.view];
+    [self.spinnerView sizeToFit];
+}
+#pragma mark MultiDialViewControllerDelegate methods
+
+- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string {
+   
+}
+
 
 -(void) initializeDayOptions{
     self.shutleDays = [[ NSMutableArray alloc] init];
@@ -128,7 +146,12 @@
     for (NSString *option in self.shutleDays){
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(startX,0,self.scrollView.bounds.size.width,self.scrollView.bounds.size.height)];
         label.numberOfLines = 0;
+        [label setTextColor:[UIColor whiteColor]];
         label.text = option;
+        CGRect labelFrame = label.frame;
+        CGSize size = [label.text sizeWithFont:label.font];
+        labelFrame.origin.x += self.scrollView.bounds.size.width/2-size.width/2;
+        label.frame = labelFrame;
         startX += label.bounds.size.width;
         label.backgroundColor = [UIColor clearColor];
         [self.scrollView addSubview:label];
