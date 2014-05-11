@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) MultiDialViewController *multiDialController;
 @property (weak, nonatomic) IBOutlet UIView *spinnerView;
+@property (strong, nonatomic) IBOutlet UILabel *dayLabel;
 
 - (IBAction)showButtonClicked;
 
