@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,13 +58,50 @@ public class ScheduleParser {
 			Document xmlDocument) throws XPathExpressionException {
 		String expression = "/feed/entry[title='HAFTA ÝÇÝ  WEEKDAYS']/content";
 		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
-		schedule.weekdayHours = new String[nodeList.getLength()];
+		ArrayList<String> weekdayHours = new ArrayList<String>();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			schedule.weekdayHours[i] = pickTime(timeIndex, time);
+			time = pickTime(timeIndex, time);
+			if(!time.equals("")) weekdayHours.add(time);
 		}
+		schedule.weekdayHours = getArray(weekdayHours);
+	}
+	
+	private static void fillWeekends(Schedule schedule, int timeIndex, XPath xPath,
+			Document xmlDocument) throws XPathExpressionException {
+		String expression = "/feed/entry[title='HAFTA SONU  WEEKENDS']/content";
+		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
+		ArrayList<String> weekendHours = new ArrayList<String>();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
+			time = pickTime(timeIndex, time);
+			if(!time.equals("")) weekendHours.add(time);
+		}
+		schedule.weekendHours = getArray(weekendHours);
+	}
+	
+	private static void fillHolidays(Schedule schedule, int timeIndex, XPath xPath,
+			Document xmlDocument) throws XPathExpressionException {
+		String expression = "/feed/entry[title='RESMÝ TATÝL OFFICIAL HOLIDAYS']/content";
+		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
+		ArrayList<String> holidayHours = new ArrayList<String>();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
+			time = pickTime(timeIndex, time);
+			if(!time.equals("")) holidayHours.add(time);
+		}
+		schedule.holidayHours = getArray(holidayHours);
 	}
 
+	private static Document getXMLDocument(String url) throws ParserConfigurationException, MalformedURLException, IOException, SAXException {
+		DocumentBuilderFactory builderFactory =
+		        DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = builderFactory.newDocumentBuilder();
+		InputStream inStream = new URL(url).openStream();
+		Document xmlDocument = builder.parse(inStream);
+		return xmlDocument;
+	}
+	
 	private static String pickTime(int timeIndex, String time) {
 		int start = (timeIndex == 1 ? 0 : time.indexOf(','));
 		int finish = (timeIndex == 1 ? time.indexOf(',') : time.length());
@@ -81,36 +119,12 @@ public class ScheduleParser {
 		return pickedTime;
 	}
 	
-	private static void fillWeekends(Schedule schedule, int timeIndex, XPath xPath,
-			Document xmlDocument) throws XPathExpressionException {
-		String expression = "/feed/entry[title='HAFTA SONU  WEEKENDS']/content";
-		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
-		schedule.weekendHours = new String[nodeList.getLength()];
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			time = pickTime(timeIndex, time);
-			schedule.weekendHours[i] = time;
+	private static String[] getArray(ArrayList<String> hoursList) {
+		String[] hoursArray = new String[hoursList.size()];
+		for (int i = 0; i < hoursList.size(); i++) {
+			hoursArray[i] = hoursList.get(i);
 		}
-	}
-	
-	private static void fillHolidays(Schedule schedule, int timeIndex, XPath xPath,
-			Document xmlDocument) throws XPathExpressionException {
-		String expression = "/feed/entry[title='RESMÝ TATÝL OFFICIAL HOLIDAYS']/content";
-		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
-		schedule.holidayHours = new String[nodeList.getLength()];
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			time = pickTime(timeIndex, time);
-			schedule.holidayHours[i] = time;
-		}
+		return hoursArray;
 	}
 
-	private static Document getXMLDocument(String url) throws ParserConfigurationException, MalformedURLException, IOException, SAXException {
-		DocumentBuilderFactory builderFactory =
-		        DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = builderFactory.newDocumentBuilder();
-		InputStream inStream = new URL(url).openStream();
-		Document xmlDocument = builder.parse(inStream);
-		return xmlDocument;
-	}
 }
