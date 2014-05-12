@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B29F2CE191FF0BB0039B2D9 /* rightArrow.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2CD191FF0BB0039B2D9 /* rightArrow.jpeg */; };
+		7B29F2D0191FF1390039B2D9 /* rightarrow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2CF191FF1390039B2D9 /* rightarrow2.png */; };
+		7B29F2D2191FF1E50039B2D9 /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2D1191FF1E50039B2D9 /* leftArrow.png */; };
 		7BC8791A190EC869002C9779 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC87919190EC869002C9779 /* UIKit.framework */; };
 		7BC8791C190EC869002C9779 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC8791B190EC869002C9779 /* Foundation.framework */; };
 		7BC8791E190EC869002C9779 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BC8791D190EC869002C9779 /* CoreGraphics.framework */; };
@@ -24,6 +27,21 @@
 		7BC87948190EC86A002C9779 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BC87946190EC86A002C9779 /* InfoPlist.strings */; };
 		7BC8794B190EC86A002C9779 /* OzuShuttleV2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8794A190EC86A002C9779 /* OzuShuttleV2Tests.m */; };
 		7BC87956190ED342002C9779 /* ShuttleHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC87955190ED342002C9779 /* ShuttleHoursViewController.m */; };
+		7BC8795919180431002C9779 /* DummyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8795819180431002C9779 /* DummyInfo.m */; };
+		7BC8795C19180969002C9779 /* photo_edit_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8795B19180969002C9779 /* photo_edit_background.png */; };
+		7BC8795E19180980002C9779 /* photo_edit_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8795D19180980002C9779 /* photo_edit_background@2x.png */; };
+		7BC8796719180BE8002C9779 /* addDescriptionBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8795F19180BE7002C9779 /* addDescriptionBackGround.png */; };
+		7BC8796819180BE8002C9779 /* addDescriptionBackGround@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796019180BE7002C9779 /* addDescriptionBackGround@2x.png */; };
+		7BC8796919180BE8002C9779 /* addDescriptionTextView.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796119180BE8002C9779 /* addDescriptionTextView.png */; };
+		7BC8796A19180BE8002C9779 /* addDescriptionTextView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796219180BE8002C9779 /* addDescriptionTextView@2x.png */; };
+		7BC8796B19180BE8002C9779 /* row_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796319180BE8002C9779 /* row_background.png */; };
+		7BC8796C19180BE8002C9779 /* row_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796419180BE8002C9779 /* row_background@2x.png */; };
+		7BC8796D19180BE8002C9779 /* selectorSquare.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796519180BE8002C9779 /* selectorSquare.png */; };
+		7BC8796E19180BE8002C9779 /* selectorSquare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8796619180BE8002C9779 /* selectorSquare@2x.png */; };
+		7BC8797B191817DF002C9779 /* DialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC87976191817DF002C9779 /* DialController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7BC8797C191817DF002C9779 /* GlowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC87978191817DF002C9779 /* GlowLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7BC8797D191817DF002C9779 /* MultiDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8797A191817DF002C9779 /* MultiDialViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7BC8797F19182129002C9779 /* overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8797E19182129002C9779 /* overlay@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B29F2CD191FF0BB0039B2D9 /* rightArrow.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rightArrow.jpeg; sourceTree = "<group>"; };
+		7B29F2CF191FF1390039B2D9 /* rightarrow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow2.png; sourceTree = "<group>"; };
+		7B29F2D1191FF1E50039B2D9 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
 		7BC87916190EC869002C9779 /* OzuShuttleV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OzuShuttleV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BC87919190EC869002C9779 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7BC8791B190EC869002C9779 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +82,25 @@
 		7BC8794A190EC86A002C9779 /* OzuShuttleV2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OzuShuttleV2Tests.m; sourceTree = "<group>"; };
 		7BC87954190ED342002C9779 /* ShuttleHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShuttleHoursViewController.h; sourceTree = "<group>"; };
 		7BC87955190ED342002C9779 /* ShuttleHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShuttleHoursViewController.m; sourceTree = "<group>"; };
+		7BC8795719180431002C9779 /* DummyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DummyInfo.h; sourceTree = "<group>"; };
+		7BC8795819180431002C9779 /* DummyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DummyInfo.m; sourceTree = "<group>"; };
+		7BC8795B19180969002C9779 /* photo_edit_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photo_edit_background.png; path = Images/photo_edit_background.png; sourceTree = "<group>"; };
+		7BC8795D19180980002C9779 /* photo_edit_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "photo_edit_background@2x.png"; path = "Images/photo_edit_background@2x.png"; sourceTree = "<group>"; };
+		7BC8795F19180BE7002C9779 /* addDescriptionBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addDescriptionBackGround.png; path = Images/addDescriptionBackGround.png; sourceTree = "<group>"; };
+		7BC8796019180BE7002C9779 /* addDescriptionBackGround@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "addDescriptionBackGround@2x.png"; path = "Images/addDescriptionBackGround@2x.png"; sourceTree = "<group>"; };
+		7BC8796119180BE8002C9779 /* addDescriptionTextView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addDescriptionTextView.png; path = Images/addDescriptionTextView.png; sourceTree = "<group>"; };
+		7BC8796219180BE8002C9779 /* addDescriptionTextView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "addDescriptionTextView@2x.png"; path = "Images/addDescriptionTextView@2x.png"; sourceTree = "<group>"; };
+		7BC8796319180BE8002C9779 /* row_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = row_background.png; path = Images/row_background.png; sourceTree = "<group>"; };
+		7BC8796419180BE8002C9779 /* row_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "row_background@2x.png"; path = "Images/row_background@2x.png"; sourceTree = "<group>"; };
+		7BC8796519180BE8002C9779 /* selectorSquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectorSquare.png; path = Images/selectorSquare.png; sourceTree = "<group>"; };
+		7BC8796619180BE8002C9779 /* selectorSquare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "selectorSquare@2x.png"; path = "Images/selectorSquare@2x.png"; sourceTree = "<group>"; };
+		7BC87975191817DF002C9779 /* DialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialController.h; sourceTree = "<group>"; };
+		7BC87976191817DF002C9779 /* DialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialController.m; sourceTree = "<group>"; };
+		7BC87977191817DF002C9779 /* GlowLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlowLabel.h; sourceTree = "<group>"; };
+		7BC87978191817DF002C9779 /* GlowLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlowLabel.m; sourceTree = "<group>"; };
+		7BC87979191817DF002C9779 /* MultiDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiDialViewController.h; sourceTree = "<group>"; };
+		7BC8797A191817DF002C9779 /* MultiDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiDialViewController.m; sourceTree = "<group>"; };
+		7BC8797E19182129002C9779 /* overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +160,7 @@
 		7BC8791F190EC869002C9779 /* OzuShuttleV2 */ = {
 			isa = PBXGroup;
 			children = (
+				7BC87974191817DF002C9779 /* CustomSpinner */,
 				7BC87954190ED342002C9779 /* ShuttleHoursViewController.h */,
 				7BC87955190ED342002C9779 /* ShuttleHoursViewController.m */,
 				7BC87928190EC869002C9779 /* OzuShuttleV2AppDelegate.h */,
@@ -135,6 +176,7 @@
 		7BC87920190EC869002C9779 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7BC8795A19180937002C9779 /* Images */,
 				7BC87921190EC869002C9779 /* OzuShuttleV2-Info.plist */,
 				7BC87922190EC869002C9779 /* InfoPlist.strings */,
 				7BC87925190EC869002C9779 /* main.m */,
@@ -142,6 +184,8 @@
 				7BC8792B190EC869002C9779 /* Default.png */,
 				7BC8792D190EC869002C9779 /* Default@2x.png */,
 				7BC8792F190EC869002C9779 /* Default-568h@2x.png */,
+				7BC8795719180431002C9779 /* DummyInfo.h */,
+				7BC8795819180431002C9779 /* DummyInfo.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -163,6 +207,40 @@
 				7BC87946190EC86A002C9779 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7BC8795A19180937002C9779 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				7B29F2D1191FF1E50039B2D9 /* leftArrow.png */,
+				7B29F2CF191FF1390039B2D9 /* rightarrow2.png */,
+				7B29F2CD191FF0BB0039B2D9 /* rightArrow.jpeg */,
+				7BC8797E19182129002C9779 /* overlay@2x.png */,
+				7BC8795F19180BE7002C9779 /* addDescriptionBackGround.png */,
+				7BC8796019180BE7002C9779 /* addDescriptionBackGround@2x.png */,
+				7BC8796119180BE8002C9779 /* addDescriptionTextView.png */,
+				7BC8796219180BE8002C9779 /* addDescriptionTextView@2x.png */,
+				7BC8796319180BE8002C9779 /* row_background.png */,
+				7BC8796419180BE8002C9779 /* row_background@2x.png */,
+				7BC8796519180BE8002C9779 /* selectorSquare.png */,
+				7BC8796619180BE8002C9779 /* selectorSquare@2x.png */,
+				7BC8795D19180980002C9779 /* photo_edit_background@2x.png */,
+				7BC8795B19180969002C9779 /* photo_edit_background.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		7BC87974191817DF002C9779 /* CustomSpinner */ = {
+			isa = PBXGroup;
+			children = (
+				7BC87975191817DF002C9779 /* DialController.h */,
+				7BC87976191817DF002C9779 /* DialController.m */,
+				7BC87977191817DF002C9779 /* GlowLabel.h */,
+				7BC87978191817DF002C9779 /* GlowLabel.m */,
+				7BC87979191817DF002C9779 /* MultiDialViewController.h */,
+				7BC8797A191817DF002C9779 /* MultiDialViewController.m */,
+			);
+			path = CustomSpinner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +321,20 @@
 				7BC8792E190EC869002C9779 /* Default@2x.png in Resources */,
 				7BC87930190EC869002C9779 /* Default-568h@2x.png in Resources */,
 				7BC87933190EC869002C9779 /* MainStoryboard.storyboard in Resources */,
+				7BC8795C19180969002C9779 /* photo_edit_background.png in Resources */,
+				7BC8795E19180980002C9779 /* photo_edit_background@2x.png in Resources */,
+				7BC8796719180BE8002C9779 /* addDescriptionBackGround.png in Resources */,
+				7BC8796819180BE8002C9779 /* addDescriptionBackGround@2x.png in Resources */,
+				7BC8796919180BE8002C9779 /* addDescriptionTextView.png in Resources */,
+				7BC8796A19180BE8002C9779 /* addDescriptionTextView@2x.png in Resources */,
+				7BC8796B19180BE8002C9779 /* row_background.png in Resources */,
+				7BC8796C19180BE8002C9779 /* row_background@2x.png in Resources */,
+				7BC8796D19180BE8002C9779 /* selectorSquare.png in Resources */,
+				7BC8796E19180BE8002C9779 /* selectorSquare@2x.png in Resources */,
+				7BC8797F19182129002C9779 /* overlay@2x.png in Resources */,
+				7B29F2CE191FF0BB0039B2D9 /* rightArrow.jpeg in Resources */,
+				7B29F2D0191FF1390039B2D9 /* rightarrow2.png in Resources */,
+				7B29F2D2191FF1E50039B2D9 /* leftArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +373,10 @@
 				7BC8792A190EC869002C9779 /* OzuShuttleV2AppDelegate.m in Sources */,
 				7BC87936190EC86A002C9779 /* OzuShuttleV2ViewController.m in Sources */,
 				7BC87956190ED342002C9779 /* ShuttleHoursViewController.m in Sources */,
+				7BC8795919180431002C9779 /* DummyInfo.m in Sources */,
+				7BC8797B191817DF002C9779 /* DialController.m in Sources */,
+				7BC8797C191817DF002C9779 /* GlowLabel.m in Sources */,
+				7BC8797D191817DF002C9779 /* MultiDialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
