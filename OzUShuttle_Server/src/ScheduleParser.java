@@ -18,15 +18,12 @@ import org.xml.sax.SAXException;
 public class ScheduleParser {
 		
 	public static Schedule parse(String route) { 
-		if (route.equals(Route.ALTUNIZADE_TO_CEKMEKOY)) {
-			return getAltunizadeToCekmekoy();
-		}
-		return null;
+		return getSchedule(new Route(route));
 	}
 
-	private static Schedule getAltunizadeToCekmekoy() {
+	private static Schedule getSchedule(Route route) {
 		try {
-			return readSchedule(Route.ALTUNIZADE_TO_CEKMEKOY, 2, "altunizade", "cekmekoy","https://spreadsheets.google.com/feeds/list/0AmK7DU4zdDcLdGFIVUdTakZWWHoyYjFVYVBwWlljWkE/od6/public/basic");
+			return readSchedule(route.name, route.routeLink.timeIndex, route.departure, route.destination, route.routeLink.link);
 		} catch (XPathExpressionException e) {
 			System.err.println("Parser XPathExpressionException!");
 		} catch (MalformedURLException e) {
@@ -63,13 +60,25 @@ public class ScheduleParser {
 		schedule.weekdayHours = new String[nodeList.getLength()];
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			if (timeIndex == 1) {
-				time = time.substring(8, 12);
-			} else {
-				time = time.substring(time.lastIndexOf(", ") + 10, time.lastIndexOf(", ") + 15);
-			}
-			schedule.weekdayHours[i] = time;
+			schedule.weekdayHours[i] = pickTime(timeIndex, time);
 		}
+	}
+
+	private static String pickTime(int timeIndex, String time) {
+		int start = (timeIndex == 1 ? 0 : time.indexOf(','));
+		int finish = (timeIndex == 1 ? time.indexOf(',') : time.length());
+		String pickedTime = "";
+		if(start != -1 && finish != -1) {
+			time = time.substring(start, finish);
+			start = time.indexOf(": ") + 1;
+			finish = time.length();
+			for (int i = start ; i < finish; i++) {
+				if(Character.isDigit(time.charAt(i)) || time.charAt(i) == ':')
+						pickedTime += time.charAt(i);
+			}
+			pickedTime = pickedTime.substring(0, pickedTime.indexOf(':') + 3);
+		}
+		return pickedTime;
 	}
 	
 	private static void fillWeekends(Schedule schedule, int timeIndex, XPath xPath,
@@ -79,11 +88,7 @@ public class ScheduleParser {
 		schedule.weekendHours = new String[nodeList.getLength()];
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			if (timeIndex == 1) {
-				time = time.substring(8, 12);
-			} else {
-				time = time.substring(time.lastIndexOf(", ") + 10, time.lastIndexOf(", ") + 15);
-			}
+			time = pickTime(timeIndex, time);
 			schedule.weekendHours[i] = time;
 		}
 	}
@@ -95,11 +100,7 @@ public class ScheduleParser {
 		schedule.holidayHours = new String[nodeList.getLength()];
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
-			if (timeIndex == 1) {
-				time = time.substring(8, 12);
-			} else {
-				time = time.substring(time.lastIndexOf(", ") + 10, time.lastIndexOf(", ") + 15);
-			}
+			time = pickTime(timeIndex, time);
 			schedule.holidayHours[i] = time;
 		}
 	}
