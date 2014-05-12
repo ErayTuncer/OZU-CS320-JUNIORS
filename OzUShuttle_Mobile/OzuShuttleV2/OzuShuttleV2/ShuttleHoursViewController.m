@@ -10,7 +10,6 @@
 #import "DummyInfo.h"
 @interface ShuttleHoursViewController ()
 @property (nonatomic,strong) NSArray *shuttleHours;
-@property (nonatomic, strong) NSDictionary *shuttleInfo;
 @end
 
 @implementation ShuttleHoursViewController
@@ -40,27 +39,15 @@
 }
 
 -(void) loadShuttleInfos{
-    //self.shuttleHours = [DummyInfo getShuttleHoursForDeparture: self.source Destination: self.destination DayType: self.dayType];
-    self.shuttleInfo = [DummyInfo initStaticJsonData];
+    self.shuttleHours = [DummyInfo getShuttleHoursForDeparture: self.source Destination: self.destination DayType: self.dayType];
+    
 }
 
 #pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    if([self.dayType isEqualToString:@"Weekdays"]){
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"weekdayHours"];
-        return [self.shuttleHours count];
-    }else if ([self.dayType isEqualToString:@"Weekends"]){
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"weekendHours"];
-        return [self.shuttleHours count];
-    }else if ([self.dayType isEqualToString:@"Holidays"]) {
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"holidayHours"];
-        return [self.shuttleHours count];
-    }else {
-        return 5;
-    }
+    return self.shuttleHours.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

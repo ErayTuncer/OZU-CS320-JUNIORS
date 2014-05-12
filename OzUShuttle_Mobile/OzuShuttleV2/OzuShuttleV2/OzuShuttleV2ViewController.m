@@ -16,7 +16,6 @@
 @property(nonatomic) NSString *source;
 @property(nonatomic) NSString *destination;
 @property(nonatomic) NSString *dayType;
-@property(nonatomic) NSString *currentDay;
 @property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
@@ -32,22 +31,21 @@
     self.destination = @"Çekmeköy";
     self.dayType = @"Weekdays";
     [self initMapImageScrollView];
-    [self learnCurrentDay];
+    
     [self addCustomSpinner];
-}
+    
 
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 
 }
-
 - (void) addCustomSpinner{
     self.multiDialController = [[MultiDialViewController alloc] init];
     self.multiDialController.delegate = self;
@@ -55,7 +53,6 @@
     [self.spinnerView addSubview:self.multiDialController.view];
     [self.spinnerView sizeToFit];
 }
-
 #pragma mark MultiDialViewControllerDelegate methods
 
 - (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string {
@@ -68,13 +65,6 @@
     [self.shutleDays addObject:@"Weekdays"];
     [self.shutleDays addObject:@"Weekends"];
     [self.shutleDays addObject:@"Holidays"];
-}
-
--(void) learnCurrentDay{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEEE"];
-    self.currentDay = [dateFormatter stringFromDate:[NSDate date]];
-    self.dayLabel.text = self.currentDay;
 }
 
 #pragma mark - Picker View
@@ -170,7 +160,7 @@
 }
 
 - (IBAction)showButtonClicked {
-    
+
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

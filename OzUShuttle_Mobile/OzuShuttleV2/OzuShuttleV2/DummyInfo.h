@@ -12,6 +12,4 @@
 
 +(NSArray *) getShuttleHoursForDeparture:(NSString *)source  Destination:(NSString *)destination DayType:(NSString *)dayType;
 
-+(NSDictionary *) initStaticJsonData;
-
 @end
