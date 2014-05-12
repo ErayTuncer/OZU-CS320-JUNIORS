@@ -30,6 +30,7 @@
 - (id)initWithDialFrame:(CGRect)frame strings:(NSArray *)dialStrings;
 - (void)spinToRandomString;
 - (void)spinToString:(NSString *)string;
+-(void) spintoNextString;
 
 @end
 

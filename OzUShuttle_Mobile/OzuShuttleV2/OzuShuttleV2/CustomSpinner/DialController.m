@@ -106,6 +106,11 @@ static const int kGlowLabelTag = 2011;
     [self spinToString:[self.strings objectAtIndex:arc4random() % [self.strings count]]];
 }
 
+-(void) spintoNextString{
+    NSString *string = self.strings[(selectedStringIndex++)%self.strings.count];
+    [self spinToString:string];
+}
+
 - (void)spinToString:(NSString *)string {
     isAnimating = NO;
     self.isSpinning = NO;

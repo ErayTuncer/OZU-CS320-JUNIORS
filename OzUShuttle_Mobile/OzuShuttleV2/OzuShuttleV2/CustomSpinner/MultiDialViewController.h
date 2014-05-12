@@ -13,9 +13,6 @@
     
     DialController *dial1;
     DialController *dial2;
-    DialController *dial3;
-    DialController *dial4;
-    
     //optional array of preset values
 	NSArray *presetStrings;
 }
@@ -24,8 +21,7 @@
 
 @property (nonatomic, retain) DialController *dial1;
 @property (nonatomic, retain) DialController *dial2;
-@property (nonatomic, retain) DialController *dial3;
-@property (nonatomic, retain) DialController *dial4;
+
 
 @property (nonatomic, retain) NSArray *presetStrings;
 
@@ -35,5 +31,5 @@
 
 
 @protocol MultiDialViewControllerDelegate 
-- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string;
+- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSArray *)strings withDial:(DialController *)dial;
 @end

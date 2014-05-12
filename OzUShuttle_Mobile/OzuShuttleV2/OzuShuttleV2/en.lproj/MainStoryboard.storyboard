@@ -40,16 +40,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <pickerView hidden="YES" contentMode="scaleToFill" id="0L3-Vu-7JB">
-                                <rect key="frame" x="0.0" y="73" width="320" height="216"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="2" id="t6Y-ZG-H8I"/>
-                                    <outlet property="delegate" destination="2" id="54h-Bw-jnF"/>
-                                </connections>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tPK-wT-Sqc">
-                                <rect key="frame" x="132" y="353" width="69" height="34"/>
+                                <rect key="frame" x="126" y="382" width="69" height="34"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
@@ -62,24 +54,26 @@
                                 </state>
                                 <connections>
                                     <action selector="showButtonClicked" destination="2" eventType="touchUpInside" id="vrr-tX-BrA"/>
-                                    <segue destination="3GT-71-AJk" kind="push" identifier="show" id="e3Z-TI-EtI"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" indicatorStyle="black" id="Nug-n7-Fef">
-                                <rect key="frame" x="20" y="297" width="280" height="48"/>
+                                <rect key="frame" x="20" y="326" width="280" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2" id="Md5-Yv-6Ba"/>
+                                </connections>
                             </scrollView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Departure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dt-te-wbj">
-                                <rect key="frame" x="20" y="44" width="76" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Departure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dt-te-wbj">
+                                <rect key="frame" x="42" y="45" width="76" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.96474327579999997" blue="0.92061624929999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="90n-eH-5lg">
-                                <rect key="frame" x="214" y="44" width="86" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Destination" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="90n-eH-5lg">
+                                <rect key="frame" x="187" y="44" width="86" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.96474327579999997" blue="0.92061624929999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -88,14 +82,32 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="rightarrow2.png" id="mPL-QL-FLE">
+                                <rect key="frame" x="301" y="343" width="11" height="13"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="leftArrow.png" id="IPP-9u-qPJ">
+                                <rect key="frame" x="6" y="343" width="11" height="13"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Tu-E0-qtl">
+                                <rect key="frame" x="128" y="297" width="65" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Ozu Shuttle" id="fR9-Wy-lRs"/>
                     <connections>
-                        <outlet property="pickerView" destination="0L3-Vu-7JB" id="wUs-Mf-8ih"/>
+                        <outlet property="dayLabel" destination="8Tu-E0-qtl" id="Y36-LP-KFq"/>
+                        <outlet property="leftScrollArrow" destination="IPP-9u-qPJ" id="QAA-bo-OPj"/>
+                        <outlet property="rightScrollArrow" destination="mPL-QL-FLE" id="IAJ-7L-8QQ"/>
                         <outlet property="scrollView" destination="Nug-n7-Fef" id="4d3-Wv-kFi"/>
                         <outlet property="spinnerView" destination="Pus-8g-aif" id="o1V-3H-yrQ"/>
+                        <segue destination="3GT-71-AJk" kind="push" identifier="show" id="TNi-Zx-HSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
@@ -155,7 +167,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="leftArrow.png" width="88" height="99"/>
         <image name="photo_edit_background.png" width="320" height="480"/>
+        <image name="rightarrow2.png" width="88" height="99"/>
         <image name="selectorSquare.png" width="92" height="53"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

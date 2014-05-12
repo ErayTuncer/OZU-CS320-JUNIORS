@@ -16,6 +16,7 @@
 @property(nonatomic) NSString *source;
 @property(nonatomic) NSString *destination;
 @property(nonatomic) NSString *dayType;
+@property(nonatomic) NSString *currentDay;
 @property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
@@ -31,32 +32,60 @@
     self.destination = @"Çekmeköy";
     self.dayType = @"Weekdays";
     [self initMapImageScrollView];
-    
+    self.leftScrollArrow.hidden = YES;
     [self addCustomSpinner];
-    
+
 
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if (self.currentDay ==nil) {
+        [self.multiDialController.dial1 spinToString:@"Altunizade"];
+        [self.multiDialController.dial2 spinToString:@"Çekmeköy"];
+    }
+    
+    [self learnCurrentDay];
+
+    
 
 }
+
 - (void) addCustomSpinner{
     self.multiDialController = [[MultiDialViewController alloc] init];
     self.multiDialController.delegate = self;
     self.multiDialController.view.frame = CGRectOffset(self.multiDialController.view.frame, 0.0, 0);
     [self.spinnerView addSubview:self.multiDialController.view];
     [self.spinnerView sizeToFit];
+    
 }
+
 #pragma mark MultiDialViewControllerDelegate methods
 
-- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSString *)string {
-   
+- (void)multiDialViewController:(MultiDialViewController *)controller didSelectString:(NSArray *)strings withDial:(DialController *)dial{
+    NSString *departure = strings[0];
+    NSString *destination = strings[1];
+    if ([departure isEqualToString:destination]) {
+        if (dial == controller.dial1) {
+            [controller.dial2 spintoNextString];
+
+        }
+        if (dial == controller.dial2) {
+            [controller.dial1 spintoNextString];
+            
+        }
+    }
+    else{
+        self.source = strings[0];
+        self.destination = strings[1];
+    }
 }
 
 
@@ -67,73 +96,23 @@
     [self.shutleDays addObject:@"Holidays"];
 }
 
-#pragma mark - Picker View
-
-// returns the number of 'columns' to display.
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 2; // kalkis - gidis
-}
-
-// returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return 2;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
+-(void) learnCurrentDay{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE"];
+    self.currentDay = [dateFormatter stringFromDate:[NSDate date]];
+    self.dayLabel.text = self.currentDay;
     
-    NSMutableArray *shutleArray = [[ NSMutableArray alloc] init];
-    [shutleArray addObject:@"Altunizade"];
-    [shutleArray addObject:@"Cekmekoy"];
-    if (component == 0) {
-        return [shutleArray objectAtIndex:row];
-    } else {
-        return [shutleArray objectAtIndex:row];
-    }
+    [self updateScrollView];
 }
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    if([pickerView selectedRowInComponent:(component+1)%2] == row){
-        [pickerView selectRow:(row+1)%2 inComponent:(component+1)%2 animated:YES];
-        [self updateDirectionsForRow:(row+1)%2  Component:(component+1)%2];
 
+-(void) updateScrollView{
+    if ([self.currentDay isEqualToString:@"Sunday"] || [self.currentDay isEqualToString:@"Saturday"]) {
+        CGPoint weekendIndex = CGPointMake((self.scrollView.contentSize.width - self.scrollView.bounds.size.width*2), 0);
+        [self.scrollView setContentOffset: weekendIndex animated:YES];
     }
-    [self updateDirectionsForRow:row Component:component];
-    
-}
--(void) updateDirectionsForRow:(NSInteger)row Component:(NSInteger)component
-{
-    switch (component) {
-        case 0:
-            switch (row) {
-                case 0:
-                    self.source = @"Altunizade";
-                    break;
-                case 1:
-                    self.source = @"Çekmeköy";
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case 1:
-            switch (row) {
-                case 0:
-                    self.destination = @"Altunizade";
-                    break;
-                case 1:
-                    self.destination = @"Çekmeköy";
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            break;
+    else{
+        
     }
-
 }
 
 - (void) initMapImageScrollView
@@ -160,7 +139,9 @@
 }
 
 - (IBAction)showButtonClicked {
-
+    if (!self.multiDialController.dial1.isSpinning && !self.multiDialController.dial2.isSpinning) {
+        [self performSegueWithIdentifier:@"show" sender:self];
+    }
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -173,5 +154,19 @@
         vc.dayType = self.dayType;
     }
 }
+
+-(void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    int scrollViewIndex = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
+    self.leftScrollArrow.hidden=NO;
+    self.rightScrollArrow.hidden=NO;
+    
+    if (scrollViewIndex == 0) {
+        self.leftScrollArrow.hidden = YES;
+    }
+    if (scrollViewIndex == 2) {
+        self.rightScrollArrow.hidden = YES;
+    }
+}
+
 
 @end
