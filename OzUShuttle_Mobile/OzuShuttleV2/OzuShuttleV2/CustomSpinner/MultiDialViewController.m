@@ -27,7 +27,7 @@
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0/60.0];
     
     //add dials and populate with these values...
-    NSArray *numbers = [NSArray arrayWithObjects:@"Altunizade", @"Çekmeköy", @"Kadıköy", nil];
+    NSArray *numbers = [NSArray arrayWithObjects:@"Altunizade", @"Cekmekoy", @"Kadikoy", nil];
     int dialCount = 0;
     
     self.dial1 = [[[DialController alloc] initWithDialFrame:CGRectMake(0,DIAL_OFFSET_Y, DIAL_WIDTH, DIAL_HEIGHT) strings:numbers] autorelease];

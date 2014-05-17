@@ -35,7 +35,6 @@
     self.leftScrollArrow.hidden = YES;
     [self addCustomSpinner];
 
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +48,7 @@
     [super viewDidAppear:animated];
     if (self.currentDay ==nil) {
         [self.multiDialController.dial1 spinToString:@"Altunizade"];
-        [self.multiDialController.dial2 spinToString:@"Çekmeköy"];
+        [self.multiDialController.dial2 spinToString:@"Cekmekoy"];
     }
     
     [self learnCurrentDay];
@@ -100,9 +99,12 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE"];
     self.currentDay = [dateFormatter stringFromDate:[NSDate date]];
-    self.dayLabel.text = self.currentDay;
-    
+    NSDate *currentDate = [NSDate date];
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:currentDate]; // Get necessary date components
+    self.dayLabel.text = [NSString stringWithFormat:@"Today: %ld.%ld.%ld - %@", (long)[components day], (long)[components month], (long)[components year], self.currentDay];
     [self updateScrollView];
+    
 }
 
 -(void) updateScrollView{
