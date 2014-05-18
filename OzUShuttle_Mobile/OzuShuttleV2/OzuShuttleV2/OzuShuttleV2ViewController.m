@@ -17,7 +17,6 @@
 @property(nonatomic) NSString *destination;
 @property(nonatomic) NSString *dayType;
 @property(nonatomic) NSString *currentDay;
-@property (strong, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
 
@@ -27,10 +26,9 @@
 {
     [super viewDidLoad];
     [self initializeDayOptions];
-    [self.pickerView selectRow:1 inComponent:1 animated:YES];
     self.source = @"Altunizade";
     self.destination = @"Çekmeköy";
-    self.dayType = @"Weekdays";
+    self.dayType = @"weekdayHours";
     [self initMapImageScrollView];
     self.leftScrollArrow.hidden = YES;
     [self addCustomSpinner];
@@ -111,6 +109,8 @@
     if ([self.currentDay isEqualToString:@"Sunday"] || [self.currentDay isEqualToString:@"Saturday"]) {
         CGPoint weekendIndex = CGPointMake((self.scrollView.contentSize.width - self.scrollView.bounds.size.width*2), 0);
         [self.scrollView setContentOffset: weekendIndex animated:YES];
+        self.dayType = @"weekendHours";
+
     }
     else{
         
@@ -147,11 +147,9 @@
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    int scrollViewIndex = self.scrollView.contentOffset.x / self.scrollView.frame.size.width;
-    self.dayType = [self.shutleDays objectAtIndex:scrollViewIndex];
     if([segue.identifier isEqualToString:@"show"]){
         ShuttleHoursViewController *vc = segue.destinationViewController;
-        vc.source = self.source;
+        vc.departure = self.source;
         vc.destination = self.destination;
         vc.dayType = self.dayType;
     }
@@ -164,9 +162,14 @@
     
     if (scrollViewIndex == 0) {
         self.leftScrollArrow.hidden = YES;
+        self.dayType = @"weekdayHours";
+    }
+    if (scrollViewIndex == 1) {
+        self.dayType = @"weekendHours";
     }
     if (scrollViewIndex == 2) {
         self.rightScrollArrow.hidden = YES;
+        self.dayType = @"holidayHours";
     }
 }
 

@@ -148,7 +148,7 @@ static const int kGlowLabelTag = 2011;
             
             //check if snappin will not result in an animation. in that case, call the delegate here
             if ([self.tableView rectForRowAtIndexPath:[self.tableView indexPathForCell:cell]].origin.y == self.tableView.contentOffset.y + (self.tableView.frame.size.height - ROW_HEIGHT) * .5) {
-                NSLog(@"snap will not animate!");
+               // NSLog(@"snap will not animate!");
                 
                 [self.delegate dialController:self didSnapToString:self.selectedString];
                 isAnimating = NO;

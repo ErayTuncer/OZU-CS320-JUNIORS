@@ -8,11 +8,12 @@
 
 #import "ShuttleHoursViewController.h"
 #import "DummyInfo.h"
+#import "HUDHelper.h"
 @interface ShuttleHoursViewController ()
-@property (nonatomic) NSArray *shuttleHours;
-@property (nonatomic) NSDictionary *shuttleInfo;
-@property (nonatomic) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *shuttleHours;
+@property (strong, nonatomic) NSDictionary *shuttleInfo;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) NSString *lastUpdate;
 @end
 
 @implementation ShuttleHoursViewController
@@ -29,20 +30,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
     self.refreshControl = [[UIRefreshControl alloc] init];
-    [self setTitle:[NSString stringWithFormat:@"%@ - %@",[self.source substringToIndex:3],[self.destination substringToIndex:3]]];
+    [self.refreshControl setTintColor:[UIColor orangeColor]];
+  //  [self setTitle:[NSString stringWithFormat:@"%@ - %@",[self.departure substringToIndex:3],[self.destination substringToIndex:3]]];
   //  [self loadShuttleInfos];
     //[self loadShuttleInfo];
     [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
     [self refresh];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(NSString *) converDayOption: (NSString *) dayOption{
+    
+    if ([dayOption isEqualToString:@"weekdayHours"]) {
+        return @"Weekdays";
+    }
+    if ([dayOption isEqualToString:@"weekendHours"]) {
+        return @"Weekends";
+    }
+    if ([dayOption isEqualToString:@"holidayHours"]) {
+        return @"Holidays";
+    }
+    return nil;
 }
 
 -(void) loadShuttleInfos{
@@ -52,54 +68,89 @@
 
 - (void) refresh
 {
+    [HUDHelper showHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         [self loadShuttleInfo];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
+            [HUDHelper hideHUD];
         });
     });
 }
 
 -(void) loadShuttleInfo{
-    NSString *urlString = [NSString stringWithFormat:@"http://1-dot-superb-metric-577.appspot.com/%@-%@",[self.source lowercaseString], [self.destination lowercaseString]];
+    NSString *urlString = [NSString stringWithFormat:@"http://1-dot-superb-metric-577.appspot.com/%@-%@",[self.departure lowercaseString], [self.destination lowercaseString]];
     NSURL *url = [[NSURL alloc] initWithString:urlString];
     NSError *error;
     NSData *data = [NSData dataWithContentsOfURL:url];
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-    self.shuttleInfo = dict;
-    NSLog(@"Error: %@",error);
+    NSDictionary *dict;
+    if (data) {
+        dict = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+        NSDate *currDate = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+        [dateFormatter setDateFormat:@"dd.MM.YY HH:mm:ss"];
+        self.lastUpdate = [dateFormatter stringFromDate:currDate];
+        [self saveData:dict lastUpdateTime: self.lastUpdate];
+        
+    }else{
+        dict = [self getSavedData];
+        self.lastUpdate = [self getSavedLastUpdateTime];
+    }
+    
+    
+    self.shuttleHours = [self filterShuttleHoursFromDict: dict];
+    
+    //self.shuttleInfo = dict;
+    //NSLog(@"Error: %@",error);
     //NSLog(@"Dict: %@", dict);
 }
 
+-(void)saveData:(NSDictionary *)dict lastUpdateTime:(NSString *)updateTime{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:dict forKey:[NSString stringWithFormat:@"%@-%@",self.departure,self.destination]];
+    [userDefaults setObject:updateTime forKey:[NSString stringWithFormat:@"updateTime-%@-%@",self.departure,self.destination]];
+    [userDefaults synchronize];
+}
+
+-(NSDictionary *)getSavedData{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict =[userDefaults objectForKey:[NSString stringWithFormat:@"%@-%@",self.departure,self.destination]];
+    return dict;
+}
+
+-(NSString *) getSavedLastUpdateTime{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *updateTime = [userDefaults objectForKey:[NSString stringWithFormat:@"updateTime-%@-%@",self.departure,self.destination]];
+    return updateTime;
+}
+
+-(NSArray *) filterShuttleHoursFromDict:(NSDictionary *)dict {
+    NSArray *tempArray = [dict objectForKey:self.dayType];
+    NSMutableArray *tempArray2 = [[NSMutableArray alloc] init];
+    for (NSString *string in tempArray) {
+        if (![string isEqualToString:@""]) {
+            [tempArray2 addObject:string];
+        }
+    }
+    return tempArray2;
+}
 #pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // +1 for the initial info
-    if([self.dayType isEqualToString:@"Weekdays"]){
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"weekdayHours"];
-        return [self.shuttleHours count] +1;
-    }else if ([self.dayType isEqualToString:@"Weekends"]){
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"weekendHours"];
-        return [self.shuttleHours count] +1;
-    }else if ([self.dayType isEqualToString:@"Holidays"]) {
-        self.shuttleHours = [self.shuttleInfo objectForKey:@"holidayHours"];
-        return [self.shuttleHours count] +1;
-    }else {
-        return 5;
-    }
+   // NSLog([NSString stringWithFormat:@"%d",self.shuttleHours.count+1]);
+    return [self.shuttleHours count]+1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.row == 0){
-        NSDate *currDate = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-        [dateFormatter setDateFormat:@"dd.MM.YY HH:mm:ss"];
-        NSString *dateString = [dateFormatter stringFromDate:currDate];
         static NSString *CellIdentifier = @"updateCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        cell.textLabel.text = [NSString stringWithFormat:@"Last update %@",dateString];
+        if(!self.lastUpdate){
+        }else{
+            cell.textLabel.text = [NSString stringWithFormat:@"Last update %@",self.lastUpdate];
+        }
         return cell;
     }else {
         static NSString *CellIdentifier = @"tableCell";
@@ -107,14 +158,14 @@
         [cell.textLabel setTextColor:[UIColor whiteColor]];
         [cell.detailTextLabel setTextColor:[UIColor greenColor]];
         cell.textLabel.text = self.shuttleHours[indexPath.row-1];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",self.source,self.destination];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@ (%@)",self.departure,self.destination,[self converDayOption:self.dayType]];
         return cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *shuttleInfo = [NSString stringWithFormat:@"Departure Point is %@, arrival Point is %@, in the Day %@", self.source, self.destination, self.dayType ];
+    NSString *shuttleInfo = [NSString stringWithFormat:@"Departure Point is %@, arrival Point is %@, in the Day %@", self.departure, self.destination, self.dayType ];
     UIAlertView *detailInfoDisplay = [[UIAlertView alloc] initWithTitle:@"Shuttle"
                                                       message:shuttleInfo
                                                      delegate:self
