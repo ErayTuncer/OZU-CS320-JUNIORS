@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ShuttleHoursViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic) NSString *source;
+@property(nonatomic) NSString *departure;
 @property(nonatomic) NSString *destination;
 @property(nonatomic) NSString *dayType;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

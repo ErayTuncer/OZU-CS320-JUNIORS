@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B00BAEA192A24BD003FFC74 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B00BAE7192A24BD003FFC74 /* HUDHelper.m */; };
+		7B00BAEB192A24BD003FFC74 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B00BAE9192A24BD003FFC74 /* MBProgressHUD.m */; };
 		7B29F2CE191FF0BB0039B2D9 /* rightArrow.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2CD191FF0BB0039B2D9 /* rightArrow.jpeg */; };
 		7B29F2D0191FF1390039B2D9 /* rightarrow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2CF191FF1390039B2D9 /* rightarrow2.png */; };
 		7B29F2D2191FF1E50039B2D9 /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B29F2D1191FF1E50039B2D9 /* leftArrow.png */; };
@@ -55,6 +57,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B00BAE6192A24BD003FFC74 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
+		7B00BAE7192A24BD003FFC74 /* HUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDHelper.m; sourceTree = "<group>"; };
+		7B00BAE8192A24BD003FFC74 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		7B00BAE9192A24BD003FFC74 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		7B29F2CD191FF0BB0039B2D9 /* rightArrow.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rightArrow.jpeg; sourceTree = "<group>"; };
 		7B29F2CF191FF1390039B2D9 /* rightarrow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rightarrow2.png; sourceTree = "<group>"; };
 		7B29F2D1191FF1E50039B2D9 /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
@@ -127,6 +133,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B00BAE5192A24BD003FFC74 /* HUD Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7B00BAE6192A24BD003FFC74 /* HUDHelper.h */,
+				7B00BAE7192A24BD003FFC74 /* HUDHelper.m */,
+				7B00BAE8192A24BD003FFC74 /* MBProgressHUD.h */,
+				7B00BAE9192A24BD003FFC74 /* MBProgressHUD.m */,
+			);
+			path = "HUD Helper";
+			sourceTree = "<group>";
+		};
 		7BC8790D190EC869002C9779 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +177,7 @@
 		7BC8791F190EC869002C9779 /* OzuShuttleV2 */ = {
 			isa = PBXGroup;
 			children = (
+				7B00BAE5192A24BD003FFC74 /* HUD Helper */,
 				7BC87974191817DF002C9779 /* CustomSpinner */,
 				7BC87954190ED342002C9779 /* ShuttleHoursViewController.h */,
 				7BC87955190ED342002C9779 /* ShuttleHoursViewController.m */,
@@ -377,6 +395,8 @@
 				7BC8797B191817DF002C9779 /* DialController.m in Sources */,
 				7BC8797C191817DF002C9779 /* GlowLabel.m in Sources */,
 				7BC8797D191817DF002C9779 /* MultiDialViewController.m in Sources */,
+				7B00BAEA192A24BD003FFC74 /* HUDHelper.m in Sources */,
+				7B00BAEB192A24BD003FFC74 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

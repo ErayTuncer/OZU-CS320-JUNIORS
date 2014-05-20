@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface OzuShuttleV2ViewController : UIViewController <MultiDialViewControllerDelegate, UIScrollViewDelegate>
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) MultiDialViewController *multiDialController;
 @property (weak, nonatomic) IBOutlet UIView *spinnerView;
