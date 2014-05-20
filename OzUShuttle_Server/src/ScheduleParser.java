@@ -42,7 +42,6 @@ public class ScheduleParser {
 	private static Schedule readSchedule(String route, int timeIndex, String departure, String destination, String url) throws XPathExpressionException, MalformedURLException, ParserConfigurationException, IOException, SAXException {
 		Document xmlDocument = getXMLDocument(url);
 		XPath xPath =  XPathFactory.newInstance().newXPath();
-	
 		Schedule schedule = new Schedule();
 		schedule.route = route;
 		schedule.departureLocation = departure;
@@ -58,6 +57,7 @@ public class ScheduleParser {
 			Document xmlDocument) throws XPathExpressionException {
 		String expression = "/feed/entry[title='HAFTA ÝÇÝ  WEEKDAYS']/content";
 		NodeList nodeList = (NodeList) xPath.compile(expression).evaluate(xmlDocument, XPathConstants.NODESET);
+		System.out.println(nodeList.getLength());
 		ArrayList<String> weekdayHours = new ArrayList<String>();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			String time = nodeList.item(i).getFirstChild().getNodeValue().toString();
