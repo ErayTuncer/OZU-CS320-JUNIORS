@@ -121,7 +121,12 @@ static const int kGlowLabelTag = 2011;
     UITableViewCell *cell = [[self.tableView visibleCells] objectAtIndex:0];
     GlowLabel *label = (GlowLabel *)[cell viewWithTag:kGlowLabelTag];
     int difference = [self indexOfString:string] - [self indexOfString:label.text];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForCell:cell].row + difference inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    double delayInSeconds = 0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[self.tableView indexPathForCell:cell].row + difference inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    });
+    
 }
 
 - (void)snap {

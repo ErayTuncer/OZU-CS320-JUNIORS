@@ -44,6 +44,10 @@
 		7BC8797C191817DF002C9779 /* GlowLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC87978191817DF002C9779 /* GlowLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC8797D191817DF002C9779 /* MultiDialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BC8797A191817DF002C9779 /* MultiDialViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7BC8797F19182129002C9779 /* overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BC8797E19182129002C9779 /* overlay@2x.png */; };
+		7BE4BA621933984B00B23C88 /* CKParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4BA5C1933984B00B23C88 /* CKParagraphStyle.m */; };
+		7BE4BA631933984B00B23C88 /* CKRefreshArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4BA5E1933984B00B23C88 /* CKRefreshArrowView.m */; };
+		7BE4BA641933984B00B23C88 /* CKRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4BA611933984B00B23C88 /* CKRefreshControl.m */; };
+		7BE4BA6D19339C8100B23C88 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE4BA6C19339C8100B23C88 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +111,14 @@
 		7BC87979191817DF002C9779 /* MultiDialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiDialViewController.h; sourceTree = "<group>"; };
 		7BC8797A191817DF002C9779 /* MultiDialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiDialViewController.m; sourceTree = "<group>"; };
 		7BC8797E19182129002C9779 /* overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "overlay@2x.png"; sourceTree = "<group>"; };
+		7BE4BA5B1933984B00B23C88 /* CKParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKParagraphStyle.h; sourceTree = "<group>"; };
+		7BE4BA5C1933984B00B23C88 /* CKParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKParagraphStyle.m; sourceTree = "<group>"; };
+		7BE4BA5D1933984B00B23C88 /* CKRefreshArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshArrowView.h; sourceTree = "<group>"; };
+		7BE4BA5E1933984B00B23C88 /* CKRefreshArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRefreshArrowView.m; sourceTree = "<group>"; };
+		7BE4BA5F1933984B00B23C88 /* CKRefreshControl-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKRefreshControl-Prefix.pch"; sourceTree = "<group>"; };
+		7BE4BA601933984B00B23C88 /* CKRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshControl.h; sourceTree = "<group>"; };
+		7BE4BA611933984B00B23C88 /* CKRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRefreshControl.m; sourceTree = "<group>"; };
+		7BE4BA6C19339C8100B23C88 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BE4BA6D19339C8100B23C88 /* QuartzCore.framework in Frameworks */,
 				7BC8791A190EC869002C9779 /* UIKit.framework in Frameworks */,
 				7BC8791C190EC869002C9779 /* Foundation.framework in Frameworks */,
 				7BC8791E190EC869002C9779 /* CoreGraphics.framework in Frameworks */,
@@ -147,6 +160,7 @@
 		7BC8790D190EC869002C9779 = {
 			isa = PBXGroup;
 			children = (
+				7BE4BA6C19339C8100B23C88 /* QuartzCore.framework */,
 				7BC8791F190EC869002C9779 /* OzuShuttleV2 */,
 				7BC87943190EC86A002C9779 /* OzuShuttleV2Tests */,
 				7BC87918190EC869002C9779 /* Frameworks */,
@@ -177,6 +191,7 @@
 		7BC8791F190EC869002C9779 /* OzuShuttleV2 */ = {
 			isa = PBXGroup;
 			children = (
+				7BE4BA5A1933984B00B23C88 /* CustomRefreshControl */,
 				7B00BAE5192A24BD003FFC74 /* HUD Helper */,
 				7BC87974191817DF002C9779 /* CustomSpinner */,
 				7BC87954190ED342002C9779 /* ShuttleHoursViewController.h */,
@@ -259,6 +274,20 @@
 				7BC8797A191817DF002C9779 /* MultiDialViewController.m */,
 			);
 			path = CustomSpinner;
+			sourceTree = "<group>";
+		};
+		7BE4BA5A1933984B00B23C88 /* CustomRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				7BE4BA5B1933984B00B23C88 /* CKParagraphStyle.h */,
+				7BE4BA5C1933984B00B23C88 /* CKParagraphStyle.m */,
+				7BE4BA5D1933984B00B23C88 /* CKRefreshArrowView.h */,
+				7BE4BA5E1933984B00B23C88 /* CKRefreshArrowView.m */,
+				7BE4BA5F1933984B00B23C88 /* CKRefreshControl-Prefix.pch */,
+				7BE4BA601933984B00B23C88 /* CKRefreshControl.h */,
+				7BE4BA611933984B00B23C88 /* CKRefreshControl.m */,
+			);
+			path = CustomRefreshControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,6 +426,9 @@
 				7BC8797D191817DF002C9779 /* MultiDialViewController.m in Sources */,
 				7B00BAEA192A24BD003FFC74 /* HUDHelper.m in Sources */,
 				7B00BAEB192A24BD003FFC74 /* MBProgressHUD.m in Sources */,
+				7BE4BA621933984B00B23C88 /* CKParagraphStyle.m in Sources */,
+				7BE4BA631933984B00B23C88 /* CKRefreshArrowView.m in Sources */,
+				7BE4BA641933984B00B23C88 /* CKRefreshControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

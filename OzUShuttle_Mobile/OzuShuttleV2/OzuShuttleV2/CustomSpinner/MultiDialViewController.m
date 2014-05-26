@@ -10,7 +10,7 @@
 #define DIAL_OFFSET_X               30
 #define DIAL_OFFSET_Y               0
 #define DIAL_WIDTH                  120
-#define DIAL_HEIGHT                 180
+#define DIAL_HEIGHT                 220
 
 
 @implementation MultiDialViewController
@@ -27,7 +27,7 @@
     [[UIAccelerometer sharedAccelerometer] setUpdateInterval:1.0/60.0];
     
     //add dials and populate with these values...
-    NSArray *numbers = [NSArray arrayWithObjects:@"Altunizade", @"Cekmekoy", @"Kadikoy", @"Bostancı", @"Umraniye", @"Taksim", nil];
+    NSArray *numbers = [NSArray arrayWithObjects:@"Altunizade", @"Cekmekoy", @"Kadıkoy", @"Bostancı", @"Umraniye", @"Taksim", nil];
     
     self.dial1 = [[[DialController alloc] initWithDialFrame:CGRectMake(0,DIAL_OFFSET_Y, DIAL_WIDTH, DIAL_HEIGHT) strings:numbers] autorelease];
     self.dial1.delegate = self;
@@ -38,7 +38,7 @@
     [self.view addSubview:self.dial2.view];
     
     //select initial value
-    [self spinToRandomString:NO];
+    //[self spinToRandomString:NO];
 }
 
 - (void)viewDidUnload {

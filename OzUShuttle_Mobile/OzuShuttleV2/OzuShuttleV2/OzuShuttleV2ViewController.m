@@ -9,7 +9,6 @@
 #import "OzuShuttleV2ViewController.h"
 #import "ShuttleHoursViewController.h"
 #import "MultiDialViewController.h"
-
 @interface OzuShuttleV2ViewController ()
 
 @property(nonatomic) NSMutableArray *shutleDays;
@@ -17,6 +16,8 @@
 @property(nonatomic) NSString *destination;
 @property(nonatomic) NSString *dayType;
 @property(nonatomic) NSString *currentDay;
+
+
 
 @end
 
@@ -78,12 +79,13 @@
             [controller.dial1 spintoNextString];
             
         }
-    }
-    else{
-        self.source = strings[0];
-        self.destination = strings[1];
+    }else{
+        self.source = departure;
+        self.destination = destination;
     }
 }
+
+
 
 
 -(void) initializeDayOptions{
@@ -142,7 +144,12 @@
 
 - (IBAction)showButtonClicked {
     if (!self.multiDialController.dial1.isSpinning && !self.multiDialController.dial2.isSpinning) {
-        [self performSegueWithIdentifier:@"show" sender:self];
+        if ([self isValidRoute:self.source Destination:self.destination]) {
+            [self performSegueWithIdentifier:@"show" sender:self];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"Invalid Route" message:@"Please select a valid route" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    
     }
 }
 
@@ -171,6 +178,18 @@
         self.rightScrollArrow.hidden = YES;
         self.dayType = @"holidayHours";
     }
+}
+-(BOOL)isValidRoute:(NSString *)source Destination:(NSString *)destination{
+    
+    NSArray *validRoutes = [[NSArray alloc] initWithObjects:@"Altunizade-Cekmekoy",@"Umraniye-Cekmekoy",@"Kadıkoy-Cekmekoy",@"Bostancı-Cekmekoy",@"Taksim-Cekmekoy",@"Cekmekoy-Altunizade",@"Cekmekoy-Umraniye",@"Cekmekoy-Kadıkoy",@"Cekmekoy-Bostancı",@"Cekmekoy-Taksim", nil];
+    NSString *route = [NSString stringWithFormat:@"%@-%@",source,destination];
+    for(NSString *validRoute in validRoutes){
+        if ([validRoute isEqualToString:route]){
+            return YES;
+        }
+    }
+    return NO;
+    
 }
 
 

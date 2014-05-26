@@ -9,10 +9,11 @@
 #import "ShuttleHoursViewController.h"
 #import "DummyInfo.h"
 #import "HUDHelper.h"
+#import "CKRefreshControl.h"
 @interface ShuttleHoursViewController ()
 @property (strong, nonatomic) NSArray *shuttleHours;
 @property (strong, nonatomic) NSDictionary *shuttleInfo;
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong,nonatomic) CKRefreshControl *refreshControl;
 @property (strong, nonatomic) NSString *lastUpdate;
 @end
 
@@ -31,13 +32,11 @@
 {
     [super viewDidLoad];
     //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
-    self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl setTintColor:[UIColor orangeColor]];
   //  [self setTitle:[NSString stringWithFormat:@"%@ - %@",[self.departure substringToIndex:3],[self.destination substringToIndex:3]]];
   //  [self loadShuttleInfos];
     //[self loadShuttleInfo];
-    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
+    [self createRefreshControl];
     [self refresh];
 }
 
@@ -45,6 +44,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)createRefreshControl
+{
+    self.refreshControl=[[CKRefreshControl alloc] init];
+    [self.refreshControl setTintColor:[UIColor orangeColor]];
+    [self.refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 }
 
 -(NSString *) converDayOption: (NSString *) dayOption{
