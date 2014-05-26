@@ -1,3 +1,4 @@
+package tests;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,6 +9,10 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import server.Route;
+import server.Schedule;
+import server.XMLParser;
 
 
 public class XMLParserTest {
