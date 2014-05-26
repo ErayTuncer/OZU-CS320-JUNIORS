@@ -19,14 +19,13 @@ public class Route {
 	public static final String TAKSIM_TO_CEKMEKOY = "taksim-cekmekoy";
 	
 
-	public String departure, destination, name;
-	public RouteLink routeLink;
+	public String departure, destination, name, link;
 
 	public Route(String route) {
 		if (hasRoute(route)) {
 			this.departure = route.substring(0, route.indexOf('-'));
 			this.destination = route.substring(route.indexOf('-') + 1);
-			this.routeLink = new RouteLink(route);
+			this.link = "http://1-dot-testshuttles.appspot.com/" + route + ".xml";
 			this.name = route;
 		} else {
 			throw new RuntimeException("No such route!");

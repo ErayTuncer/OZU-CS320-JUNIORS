@@ -30,8 +30,8 @@ public class ShuttleHttpHandler extends AbstractHandler {
         String route = getRoute(target);
         if (Route.hasRoute(route)) {
             baseRequest.setHandled(true);
-            ScheduleParser.parse(route); // TODO remove!
-        	writeSchedule(ScheduleParser.parse(route), httpResponse);	
+            XMLParser.parse(route); // TODO remove!
+        	writeSchedule(XMLParser.parse(route), httpResponse);	
         } else {
             baseRequest.setHandled(true);        	
             httpResponse.getWriter().println("Not route found!"); // TODO: improve	
