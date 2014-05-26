@@ -181,7 +181,7 @@
 }
 -(BOOL)isValidRoute:(NSString *)source Destination:(NSString *)destination{
     
-    NSArray *validRoutes = [[NSArray alloc] initWithObjects:@"Altunizade-Cekmekoy",@"Umraniye-Cekmekoy",@"Kadıkoy-Cekmekoy",@"Bostancı-Cekmekoy",@"Taksim-Cekmekoy",@"Cekmekoy-Altunizade",@"Cekmekoy-Umraniye",@"Cekmekoy-Kadıkoy",@"Cekmekoy-Bostancı",@"Cekmekoy-Taksim", nil];
+    NSArray *validRoutes = [[NSArray alloc] initWithObjects:@"Altunizade-Cekmekoy",@"Umraniye-Cekmekoy",@"Kadikoy-Cekmekoy",@"Bostanci-Cekmekoy",@"Taksim-Cekmekoy",@"Cekmekoy-Altunizade",@"Cekmekoy-Umraniye",@"Cekmekoy-Kadikoy",@"Cekmekoy-Bostanci",@"Cekmekoy-Taksim", nil];
     NSString *route = [NSString stringWithFormat:@"%@-%@",source,destination];
     for(NSString *validRoute in validRoutes){
         if ([validRoute isEqualToString:route]){

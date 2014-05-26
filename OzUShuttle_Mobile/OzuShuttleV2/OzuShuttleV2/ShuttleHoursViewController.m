@@ -88,7 +88,8 @@
 }
 
 -(void) loadShuttleInfo{
-    NSString *urlString = [NSString stringWithFormat:@"http://1-dot-superb-metric-577.appspot.com/%@-%@",[self.departure lowercaseString], [self.destination lowercaseString]];
+    NSString *urlString = [NSString stringWithFormat:@"http://1-dot-testshuttles.appspot.com/%@-%@",[self.departure lowercaseString], [self.destination lowercaseString]];
+   // NSLog(@"%@ - %@", [self.departure lowercaseString], [self.destination lowercaseString]);
     NSURL *url = [[NSURL alloc] initWithString:urlString];
     NSError *error;
     NSData *data = [NSData dataWithContentsOfURL:url];
