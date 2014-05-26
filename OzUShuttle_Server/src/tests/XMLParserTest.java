@@ -14,7 +14,6 @@ import server.Route;
 import server.Schedule;
 import server.XMLParser;
 
-
 public class XMLParserTest {
 
 	@Test
@@ -39,6 +38,6 @@ public class XMLParserTest {
 			System.out.printf(format, nodeList.item(i).getNodeName());
 			printContent(nodeList.item(i).getChildNodes(), indent + 3);
 		}
-		
+
 	}
 }
